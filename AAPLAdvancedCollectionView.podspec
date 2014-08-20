@@ -14,6 +14,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "7.0"
   s.source       = { :git => "https://github.com/empora/AAPLAdvancedCollectionView.git", :tag => "v#{s.version}" }
   s.source_files = "AdvancedCollectionView/**/**/*.{h,m}"
+  s.exclude_files = "*/main.{h,m}", "*/AAPLCat*.{h,m}"
   s.framework    = "UIKit"
   s.requires_arc = true
 end

@@ -54,6 +54,9 @@ typedef void (^AAPLLayoutSupplementaryItemConfigurationBlock)(UICollectionReusab
 /// The class to use when dequeuing an instance of this supplementary view
 @property (nonatomic) Class supplementaryViewClass;
 
+/// The nib to use when dequeuing an instance of this supplementary view
+@property (nonatomic) UINib* supplementaryViewNib;
+
 /// The background color that should be used for this supplementary view. If not set, this will be inherited from the section.
 @property (nonatomic, strong) UIColor *backgroundColor;
 

@@ -37,6 +37,7 @@ NSInteger const AAPLGlobalSection = NSIntegerMax;
     item->_shouldPin = _shouldPin;
     item->_visibleWhileShowingPlaceholder = _visibleWhileShowingPlaceholder;
     item->_supplementaryViewClass = _supplementaryViewClass;
+    item->_supplementaryViewNib = _supplementaryViewNib;
     item->_createView = _createView;
     item->_configureView = _configureView;
     item->_backgroundColor = _backgroundColor;

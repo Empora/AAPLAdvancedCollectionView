@@ -27,14 +27,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+/*
     self.dataSource = [[AAPLSegmentedDataSource alloc] init];
     self.detailDataSource = [self newDetailDataSource];
     self.sightingsDataSource = [self newSightingsDataSource];
-
     [self.dataSource addDataSource:self.detailDataSource];
     [self.dataSource addDataSource:self.sightingsDataSource];
-
+*/
+    self.dataSource = (AAPLSegmentedDataSource*)[self newDetailDataSource];
+    
+    
     __weak typeof(&*self) weakself = self;
 
     AAPLLayoutSupplementaryMetrics *globalHeader = [self.dataSource newHeaderForKey:@"globalHeader"];

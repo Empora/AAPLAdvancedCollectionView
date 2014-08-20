@@ -84,16 +84,33 @@
     NSInteger numberOfSections = self.numberOfSections;
 
     AAPLLayoutSectionMetrics *globalMetrics = [self snapshotMetricsForSectionAtIndex:AAPLGlobalSection];
-    for (AAPLLayoutSupplementaryMetrics* headerMetrics in globalMetrics.headers)
-        [collectionView registerClass:headerMetrics.supplementaryViewClass forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerMetrics.reuseIdentifier];
+    for (AAPLLayoutSupplementaryMetrics* headerMetrics in globalMetrics.headers){
+        if (headerMetrics.supplementaryViewNib) {
+            [collectionView registerNib:headerMetrics.supplementaryViewNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerMetrics.reuseIdentifier];
+        } else {
+            [collectionView registerClass:headerMetrics.supplementaryViewClass forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerMetrics.reuseIdentifier];
+        }
+    }
+    
 
     for (NSInteger sectionIndex = 0; sectionIndex < numberOfSections; ++sectionIndex) {
         AAPLLayoutSectionMetrics *metrics = [self snapshotMetricsForSectionAtIndex:sectionIndex];
 
-        for (AAPLLayoutSupplementaryMetrics* headerMetrics in metrics.headers)
-            [collectionView registerClass:headerMetrics.supplementaryViewClass forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerMetrics.reuseIdentifier];
-        for (AAPLLayoutSupplementaryMetrics* footerMetrics in metrics.footers)
-            [collectionView registerClass:footerMetrics.supplementaryViewClass forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerMetrics.reuseIdentifier];
+        for (AAPLLayoutSupplementaryMetrics* headerMetrics in metrics.headers){
+            if (headerMetrics.supplementaryViewNib) {
+                [collectionView registerNib:headerMetrics.supplementaryViewNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerMetrics.reuseIdentifier];
+            } else {
+                [collectionView registerClass:headerMetrics.supplementaryViewClass forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:headerMetrics.reuseIdentifier];
+            }
+        }
+
+        for (AAPLLayoutSupplementaryMetrics* footerMetrics in metrics.footers){
+            if (footerMetrics.supplementaryViewNib) {
+                [collectionView registerNib:footerMetrics.supplementaryViewNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:footerMetrics.reuseIdentifier];
+            } else {
+                [collectionView registerClass:footerMetrics.supplementaryViewClass forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:footerMetrics.reuseIdentifier];
+            }
+        }
     }
 
     [collectionView registerClass:[AAPLCollectionPlaceholderView class] forSupplementaryViewOfKind:AAPLCollectionElementKindPlaceholder withReuseIdentifier:NSStringFromClass([AAPLCollectionPlaceholderView class])];

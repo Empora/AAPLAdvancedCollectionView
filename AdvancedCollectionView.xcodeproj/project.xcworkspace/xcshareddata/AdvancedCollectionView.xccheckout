@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>92749358-784B-4D20-ABC6-D7CC0DB40743</string>
+	<key>IDESourceControlProjectName</key>
+	<string>AdvancedCollectionView</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C9100A93739D999885D5B3D162731920B84E3E5F</key>
+		<string>https://github.com/Empora/AAPLAdvancedCollectionView.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>AdvancedCollectionView.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C9100A93739D999885D5B3D162731920B84E3E5F</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Empora/AAPLAdvancedCollectionView.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C9100A93739D999885D5B3D162731920B84E3E5F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C9100A93739D999885D5B3D162731920B84E3E5F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>AAPLAdvancedCollectionView</string>
+		</dict>
+	</array>
+</dict>
+</plist>

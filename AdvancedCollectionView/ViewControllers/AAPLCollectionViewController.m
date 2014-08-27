@@ -4,8 +4,8 @@
  
  Abstract:
  
-  A subclass of UICollectionViewController that adds support for swipe to edit and drag reordering.
-  
+ A subclass of UICollectionViewController that adds support for swipe to edit and drag reordering.
+ 
  */
 
 #import "AAPLCollectionViewController.h"
@@ -20,6 +20,20 @@ static void * const AAPLDataSourceContext = @"DataSourceContext";
 
 @interface AAPLCollectionViewController () <UICollectionViewDelegate, AAPLDataSourceDelegate>
 @property (nonatomic, strong) AAPLSwipeToEditStateMachine *swipeStateMachine;
+@end
+
+@implementation UIView (FindFirstResponder)
+- (id)findFirstResponder
+{
+    if (self.isFirstResponder) {
+        return self;
+    }
+    for (UIView *subView in self.subviews) {
+        id responder = [subView findFirstResponder];
+        if (responder) return responder;
+    }
+    return nil;
+}
 @end
 
 @implementation AAPLCollectionViewController
@@ -40,9 +54,9 @@ static void * const AAPLDataSourceContext = @"DataSourceContext";
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
+    
     UICollectionView *collectionView = self.collectionView;
-
+    
     AAPLDataSource *dataSource = (AAPLDataSource *)collectionView.dataSource;
     if ([dataSource isKindOfClass:[AAPLDataSource class]]) {
         [dataSource registerReusableViewsWithCollectionView:collectionView];
@@ -60,12 +74,12 @@ static void * const AAPLDataSourceContext = @"DataSourceContext";
 - (void)setCollectionView:(UICollectionView *)collectionView
 {
     UICollectionView *oldCollectionView = self.collectionView;
-
+    
     // Always call super, because we don't know EXACTLY what UICollectionViewController does in -setCollectionView:.
     [super setCollectionView:collectionView];
-
+    
     [oldCollectionView removeObserver:self forKeyPath:@"dataSource" context:AAPLDataSourceContext];
-
+    
     //  We need to know when the data source changes on the collection view so we can become the delegate for any APPLDataSource subclasses.
     [collectionView addObserver:self forKeyPath:@"dataSource" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:AAPLDataSourceContext];
 }
@@ -77,10 +91,10 @@ static void * const AAPLDataSourceContext = @"DataSourceContext";
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
         return;
     }
-
+    
     UICollectionView *collectionView = object;
     id<UICollectionViewDataSource> dataSource = collectionView.dataSource;
-
+    
     if ([dataSource isKindOfClass:[AAPLDataSource class]]) {
         AAPLDataSource *aaplDataSource = (AAPLDataSource *)dataSource;
         if (!aaplDataSource.delegate)
@@ -92,13 +106,13 @@ static void * const AAPLDataSourceContext = @"DataSourceContext";
 {
     if (_editing == editing)
         return;
-
+    
     _editing = editing;
-
+    
     AAPLCollectionViewGridLayout *layout = (AAPLCollectionViewGridLayout *)self.collectionView.collectionViewLayout;
-
+    
     NSAssert([layout isKindOfClass:[AAPLCollectionViewGridLayout class]], @"Editing only supported when using a layout derived from AAPLCollectionViewGridLayout");
-
+    
     if ([layout isKindOfClass:[AAPLCollectionViewGridLayout class]])
         layout.editing = editing;
     self.swipeStateMachine.batchEditing = editing;
@@ -118,11 +132,11 @@ static void * const AAPLDataSourceContext = @"DataSourceContext";
     AAPLCollectionViewGridLayout *layout = (AAPLCollectionViewGridLayout *)collectionView.collectionViewLayout;
     if (![layout isKindOfClass:[AAPLCollectionViewGridLayout class]])
         return;
-
+    
     AAPLDataSource *dataSource = (AAPLDataSource *)collectionView.dataSource;
     if (![dataSource isKindOfClass:[AAPLDataSource class]])
         return;
-
+    
     NSIndexPath *deleteIndexPath = [self.collectionView indexPathForCell:sender];
     [dataSource removeItemAtIndexPath:deleteIndexPath];
 }
@@ -159,7 +173,7 @@ static void * const AAPLDataSourceContext = @"DataSourceContext";
             [result appendString:@", "];
         [result appendFormat:@"%u", idx];
     }];
-
+    
     return result;
 }
 
@@ -200,11 +214,11 @@ static void * const AAPLDataSourceContext = @"DataSourceContext";
             }
         }
     }
-
+    
 #if UPDATE_DEBUGGING
     NSLog(@"REMOVE ITEMS: %@", [self stringFromArrayOfIndexPaths:indexPaths]);
 #endif
-
+    
     [self.collectionView deleteItemsAtIndexPaths:indexPaths];
 }
 
@@ -213,7 +227,7 @@ static void * const AAPLDataSourceContext = @"DataSourceContext";
 #if UPDATE_DEBUGGING
     NSLog(@"REFRESH ITEMS: %@", [self stringFromArrayOfIndexPaths:indexPaths]);
 #endif
-
+    
     [self.collectionView reloadItemsAtIndexPaths:indexPaths];
 }
 
@@ -234,7 +248,7 @@ static void * const AAPLDataSourceContext = @"DataSourceContext";
 {
     if (!sections)  // bail if nil just to keep collection view safe and pure
         return;
-
+    
     NSIndexPath *trackedIndexPath = _swipeStateMachine.trackedIndexPath;
     if (trackedIndexPath) {
         [sections enumerateIndexesUsingBlock:^(NSUInteger sectionIndex, BOOL *stop) {
@@ -244,7 +258,7 @@ static void * const AAPLDataSourceContext = @"DataSourceContext";
             }
         }];
     }
-
+    
 #if UPDATE_DEBUGGING
     NSLog(@"DELETE SECTIONS: %@", [self stringFromIndexSet:sections]);
 #endif
@@ -299,7 +313,11 @@ static void * const AAPLDataSourceContext = @"DataSourceContext";
         if (complete) {
             complete();
         }
-        [self.collectionView reloadData];
+        
+        id firstResponder = [self.collectionView findFirstResponder];
+        if (!firstResponder) {
+            [self.collectionView reloadData];
+        }
     }];
 }
 

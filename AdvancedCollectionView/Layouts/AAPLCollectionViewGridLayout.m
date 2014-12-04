@@ -1351,7 +1351,7 @@ typedef NS_ENUM(NSInteger, AAPLAutoScrollDirection) {
     UIColor *sectionSeparatorColor = section.sectionSeparatorColor;
     NSInteger numberOfItems = [section.items count];
 
-    CGFloat hairline = section.separatorWidth;
+    CGFloat hairline = [[UIScreen mainScreen] scale] > 1 ? 0.5 : 1;
 
     [section.pinnableHeaderAttributes removeAllObjects];
     [section.nonPinnableHeaderAttributes removeAllObjects];

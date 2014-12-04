@@ -85,7 +85,6 @@ NSInteger const AAPLGlobalSection = NSIntegerMax;
     AAPLLayoutSectionMetrics *metrics = [[self alloc] init];
     metrics.rowHeight = 44;
     metrics.numberOfColumns = 1;
-    metrics.separatorWidth = [[UIScreen mainScreen] scale] > 1 ? 0.5 : 1;
     return metrics;
 }
 

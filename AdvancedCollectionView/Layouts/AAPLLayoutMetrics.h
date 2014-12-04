@@ -109,8 +109,16 @@ typedef void (^AAPLLayoutSupplementaryItemConfigurationBlock)(UICollectionReusab
 /// The color to use when drawing the row separators (and column separators when numberOfColumns > 1 && showsColumnSeparator == YES).
 @property (nonatomic, strong) UIColor *separatorColor;
 
+
 /// The color to use when drawing the section separator below this section
 @property (nonatomic, strong) UIColor *sectionSeparatorColor;
+
+/// The width to use when drawing the row separators (and column separators when numberOfColumns > 1 && showsColumnSeparator == YES).
+@property (nonatomic, assign) CGFloat separatorWidth;
+
+
+/// The width to use when drawing the section separator below this section
+@property (nonatomic, assign) CGFloat sectionSeparatorWidth;
 
 /// Should the section separator be shown at the bottom of the last section. Default is NO.
 @property (nonatomic) BOOL showsSectionSeparatorWhenLastSection;

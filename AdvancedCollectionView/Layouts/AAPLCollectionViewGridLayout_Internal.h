@@ -72,6 +72,8 @@ typedef CGSize (^AAPLLayoutMeasureBlock)(NSInteger itemIndex, CGRect frame);
 @property (nonatomic, strong) UIColor *selectedBackgroundColor;
 @property (nonatomic, strong) UIColor *separatorColor;
 @property (nonatomic, strong) UIColor *sectionSeparatorColor;
+@property (nonatomic, assign) CGFloat separatorWidth;
+@property (nonatomic, assign) CGFloat sectionSeparatorWidth;
 @property (nonatomic) BOOL showsColumnSeparator;
 @property (nonatomic) BOOL showsSectionSeparatorWhenLastSection;
 @property (nonatomic) AAPLCellLayoutOrder cellLayoutOrder;

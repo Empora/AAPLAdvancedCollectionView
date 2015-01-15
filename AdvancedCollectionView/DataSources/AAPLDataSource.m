@@ -106,9 +106,9 @@
 
         for (AAPLLayoutSupplementaryMetrics* footerMetrics in metrics.footers){
             if (footerMetrics.supplementaryViewNib) {
-                [collectionView registerNib:footerMetrics.supplementaryViewNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:footerMetrics.reuseIdentifier];
+                [collectionView registerNib:footerMetrics.supplementaryViewNib forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerMetrics.reuseIdentifier];
             } else {
-                [collectionView registerClass:footerMetrics.supplementaryViewClass forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:footerMetrics.reuseIdentifier];
+                [collectionView registerClass:footerMetrics.supplementaryViewClass forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:footerMetrics.reuseIdentifier];
             }
         }
     }

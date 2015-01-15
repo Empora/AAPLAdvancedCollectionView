@@ -13,6 +13,8 @@
 /// A data source that is composed of other data sources.
 @interface AAPLComposedDataSource : AAPLDataSource
 
+@property (nonatomic, readonly) NSArray *dataSources;
+
 /// Add a data source to the data source.
 - (void)addDataSource:(AAPLDataSource *)dataSource;
 

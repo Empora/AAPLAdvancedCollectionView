@@ -115,6 +115,7 @@ NSInteger const AAPLGlobalSection = NSIntegerMax;
     metrics->_backgroundColor = _backgroundColor;
     metrics->_selectedBackgroundColor = _selectedBackgroundColor;
     metrics->_separatorColor = _separatorColor;
+    metrics->_foregroundColor = _foregroundColor;
     metrics->_sectionSeparatorColor = _sectionSeparatorColor;
     metrics->_sectionSeparatorInsets = _sectionSeparatorInsets;
     metrics->_hasPlaceholder = _hasPlaceholder;

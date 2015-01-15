@@ -106,6 +106,9 @@ typedef void (^AAPLLayoutSupplementaryItemConfigurationBlock)(UICollectionReusab
 /// The color to use when a cell becomes highlighted or selected
 @property (nonatomic, strong) UIColor *selectedBackgroundColor;
 
+/// The color to use in header and footer text or transparent cells
+@property (nonatomic, strong) UIColor *foregroundColor;
+
 /// The color to use when drawing the row separators (and column separators when numberOfColumns > 1 && showsColumnSeparator == YES).
 @property (nonatomic, strong) UIColor *separatorColor;
 

@@ -325,10 +325,10 @@
         _aggregateLoadingState = AAPLLoadStateRefreshingContent;
     else if (numberOfError)
         _aggregateLoadingState = AAPLLoadStateError;
-    else if (numberOfNoContent)
-        _aggregateLoadingState = AAPLLoadStateNoContent;
     else if (numberOfLoaded)
         _aggregateLoadingState = AAPLLoadStateContentLoaded;
+    else if (numberOfNoContent)
+        _aggregateLoadingState = AAPLLoadStateNoContent;
     else
         _aggregateLoadingState = AAPLLoadStateInitial;
 }

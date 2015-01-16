@@ -4,8 +4,8 @@
  
  Abstract:
  
-  A basic collection view cell with a primary and secondary label. When styled using AAPLBasicCellStyleDefault, the primary label is on the left and the secondary label is on the right. When styled with AAPLBasicCellStyleSubtitle, both the primary and secondar labels are on the left with the primary above the secondary.
-  
+ A basic collection view cell with a primary and secondary label. When styled using AAPLBasicCellStyleDefault, the primary label is on the left and the secondary label is on the right. When styled with AAPLBasicCellStyleSubtitle, both the primary and secondar labels are on the left with the primary above the secondary.
+ 
  */
 
 #import "AAPLCollectionViewCell.h"
@@ -21,6 +21,7 @@ typedef enum {
 @interface AAPLBasicCell : AAPLCollectionViewCell
 @property (nonatomic) AAPLBasicCellStyle style;
 @property (nonatomic) UIEdgeInsets contentInsets;
+@property (nonatomic, readonly) UIImageView *imageView;
 @property (nonatomic, readonly) UILabel *primaryLabel;
 @property (nonatomic, readonly) UILabel *secondaryLabel;
 @end

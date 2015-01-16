@@ -988,7 +988,7 @@ typedef NS_ENUM(NSInteger, AAPLAutoScrollDirection) {
         return [self finalLayoutAttributesForAttributes:[_oldIndexPathKindToDecorationAttributes[indexPathKind] copy] slidingAwayFromDirection:direction];
     }
 
-    BOOL removed = [self.removedSections containsIndex:section];
+    BOOL removed = [self.removedSections containsIndex:section] || [self.removedIndexPaths containsObject:indexPath];
     BOOL reloaded = [self.reloadedSections containsIndex:section];
 
     AAPLIndexPathKind *indexPathKind = [[AAPLIndexPathKind alloc] initWithIndexPath:indexPath kind:kind];

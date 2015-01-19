@@ -15,6 +15,7 @@
 @property (nonatomic, strong, readwrite) UILabel *primaryLabel;
 @property (nonatomic, strong, readwrite) UILabel *secondaryLabel;
 @property (nonatomic, strong) NSMutableArray *constraints;
+@property (nonatomic, strong) NSLayoutConstraint *primaryLabelLeadingMarginConstraint;
 @end
 
 @implementation AAPLBasicCell
@@ -45,7 +46,13 @@
     _imageView.contentMode = UIViewContentModeScaleAspectFit;
     [contentView addSubview:_imageView];
     
+    [_imageView addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionNew context:nil];
+    
     return self;
+}
+
+- (void) dealloc{
+    [_imageView removeObserver:self forKeyPath:@"image"];
 }
 
 - (void)setContentInsets:(UIEdgeInsets)contentInsets
@@ -93,16 +100,22 @@
                               @"Left" : @(_contentInsets.left),
                               @"Top" : @(_contentInsets.top),
                               @"Right" : @(_contentInsets.right),
-                              @"Bottom" : @(_contentInsets.bottom)
+                              @"Bottom" : @(_contentInsets.bottom),
+                              @"padding" : @((self.imageView.image ? 5 : 0)),
+                              @"imageWidth" : @((self.imageView.image ? 32 : 0))
                               };
     
     if (AAPLBasicCellStyleDefault == _style) {
         //define paddings
-        if (self.imageView.image) {
-            [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-Left-[_imageView(32)]-(10)-[_primaryLabel]-Right-|" options:NSLayoutFormatAlignAllBaseline metrics:metrics views:views]];
-        } else {
-            [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-Left-[_primaryLabel]-(>=10)-[_secondaryLabel]-Right-|" options:NSLayoutFormatAlignAllBaseline metrics:metrics views:views]];
+        
+        NSArray* mainConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-Left-[_imageView(imageWidth)]-(padding)-[_primaryLabel]-(>=10)-[_secondaryLabel]-Right-|" options:NSLayoutFormatAlignAllCenterY metrics:metrics views:views];
+        for (NSLayoutConstraint* constraint in mainConstraints) {
+            if (constraint.firstAttribute == NSLayoutAttributeLeading && constraint.firstItem == _primaryLabel) {
+                _primaryLabelLeadingMarginConstraint = constraint;
+                break;
+            }
         }
+        [_constraints addObjectsFromArray:mainConstraints];
         
         
         // center items
@@ -113,6 +126,10 @@
         [_constraints addObject:[NSLayoutConstraint constraintWithItem:_primaryLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationLessThanOrEqual toItem:contentView attribute:NSLayoutAttributeHeight multiplier:1 constant:0]];
         
         [_constraints addObject:[NSLayoutConstraint constraintWithItem:_imageView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:_imageView attribute:NSLayoutAttributeWidth multiplier:1.0 constant:0]];
+        /*
+         [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_imageView(32)]" options:NSLayoutFormatAlignAllLeft metrics:metrics views:views]];
+         [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_imageView(32)]" options:NSLayoutFormatAlignAllLeft metrics:metrics views:views]];
+         */
     }
     else {
         [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-Left-[_primaryLabel]-(>=Right)-|" options:0 metrics:metrics views:views]];
@@ -130,6 +147,14 @@
         [self.contentView removeConstraints:_constraints];
     _constraints = nil;
     [super setNeedsUpdateConstraints];
+}
+
+#pragma mark KeyValueObserving
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if ([keyPath isEqualToString:@"image"]) {
+        [self setNeedsUpdateConstraints];
+    }
 }
 
 @end

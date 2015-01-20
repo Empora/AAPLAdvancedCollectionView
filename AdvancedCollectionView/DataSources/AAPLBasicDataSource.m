@@ -50,6 +50,11 @@
 
 - (void)setItems:(NSArray *)items animated:(BOOL)animated
 {
+    [self setItems:items updateExistingItems:NO animated:animated];
+}
+
+- (void)setItems:(NSArray *)items updateExistingItems:(BOOL)update animated:(BOOL)animated;
+{
     if (_items == items || [_items isEqualToArray:items])
         return;
 
@@ -99,11 +104,20 @@
         [self notifyItemsInsertedAtIndexPaths:insertedIndexPaths];
 
     NSUInteger count = [fromMovedIndexPaths count];
+    NSMutableArray* refreshedIndexPaths = [NSMutableArray array];
     for (NSUInteger i = 0; i < count; ++i) {
         NSIndexPath *fromIndexPath = fromMovedIndexPaths[i];
         NSIndexPath *toIndexPath = toMovedIndexPaths[i];
-        if (fromIndexPath != nil && toIndexPath != nil)
+        
+        [refreshedIndexPaths addObject:fromIndexPath];
+        
+        if (fromIndexPath != nil && toIndexPath != nil){
             [self notifyItemMovedFromIndexPath:fromIndexPath toIndexPaths:toIndexPath];
+        }
+        
+    }
+    if (update) {
+        [self notifyItemsRefreshedAtIndexPaths:refreshedIndexPaths];
     }
 }
 

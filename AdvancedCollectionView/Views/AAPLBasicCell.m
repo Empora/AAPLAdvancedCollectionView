@@ -26,6 +26,8 @@
     if (!self)
         return nil;
     
+    _contentInsets = UIEdgeInsetsMake(0, 15, 0, 15);
+    
     UIView *contentView = self.contentView;
     UIFont *defaultFont = [UIFont systemFontOfSize:12];
     
@@ -89,7 +91,7 @@
     // Our content insets are based on a 44pt row height
     CGFloat verticalPadding = (44 - labelHeight)/2;
     
-    _contentInsets = UIEdgeInsetsMake(verticalPadding, 15, verticalPadding, 15);
+    _contentInsets = UIEdgeInsetsMake(verticalPadding, _contentInsets.left, verticalPadding, _contentInsets.right);
     
     UIView *contentView = self.contentView;
     

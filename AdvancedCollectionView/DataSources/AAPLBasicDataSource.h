@@ -19,4 +19,7 @@
 /// Set the items with optional animation. By default, setting the items is not animated.
 - (void)setItems:(NSArray *)items animated:(BOOL)animated;
 
+/// Set the items with optional animation and optionally updating existing items. By default, setting the items is not animated.
+- (void)setItems:(NSArray *)items updateExistingItems:(BOOL)update animated:(BOOL)animated;
+
 @end

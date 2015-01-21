@@ -1501,8 +1501,11 @@ typedef NS_ENUM(NSInteger, AAPLAutoScrollDirection) {
     [section.footers enumerateObjectsUsingBlock:^(AAPLGridLayoutSupplementalItemInfo *footer, NSUInteger footerIndex, BOOL *stop) {
         CGRect frame = footer.frame;
 
-        // ignore the footer if there are no items or the footer has no height
-        if (!numberOfItems || !footer.height || footer.hidden)
+        // ignore headers if there are no items and the footer isn't a global footer
+        if (!numberOfItems && !footer.visibleWhileShowingPlaceholder)
+            return;
+        
+        if (!footer.height || footer.hidden)
             return;
 
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:footerIndex inSection:sectionIndex];

@@ -111,6 +111,8 @@
 		1FE17C16193193E900620DC3 /* AAPLCatSightingCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 1FE17C14193193E900620DC3 /* AAPLCatSightingCell.h */; };
 		1FE17C17193193E900620DC3 /* AAPLCatSightingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1FE17C15193193E900620DC3 /* AAPLCatSightingCell.m */; };
 		3E4EC382193D3D990070862B /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 3E4EC381193D3D990070862B /* README.md */; };
+		E1178C201A79ADBB000F6748 /* AAPLCollectionViewSectionedGridLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = E1178C1E1A79ADBB000F6748 /* AAPLCollectionViewSectionedGridLayout.h */; };
+		E1178C211A79ADBB000F6748 /* AAPLCollectionViewSectionedGridLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E1178C1F1A79ADBB000F6748 /* AAPLCollectionViewSectionedGridLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -220,6 +222,8 @@
 		1FE17C14193193E900620DC3 /* AAPLCatSightingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLCatSightingCell.h; sourceTree = "<group>"; };
 		1FE17C15193193E900620DC3 /* AAPLCatSightingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPLCatSightingCell.m; sourceTree = "<group>"; };
 		3E4EC381193D3D990070862B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		E1178C1E1A79ADBB000F6748 /* AAPLCollectionViewSectionedGridLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLCollectionViewSectionedGridLayout.h; sourceTree = "<group>"; };
+		E1178C1F1A79ADBB000F6748 /* AAPLCollectionViewSectionedGridLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPLCollectionViewSectionedGridLayout.m; sourceTree = "<group>"; };
 		E18CA4BF19AE0C4E000E4BED /* AAPLAdvancedCollectionView.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AAPLAdvancedCollectionView.podspec; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -318,6 +322,8 @@
 				1FA42A70192A7E1200F673A0 /* AAPLLayoutMetrics.h */,
 				1FA42A71192A7E1200F673A0 /* AAPLLayoutMetrics.m */,
 				1FA42A72192A7E1200F673A0 /* AAPLLayoutMetrics_Private.h */,
+				E1178C1E1A79ADBB000F6748 /* AAPLCollectionViewSectionedGridLayout.h */,
+				E1178C1F1A79ADBB000F6748 /* AAPLCollectionViewSectionedGridLayout.m */,
 			);
 			path = Layouts;
 			sourceTree = "<group>";
@@ -480,6 +486,7 @@
 				1FA42AF8192A910C00F673A0 /* AAPLDataAccessManager.h in Headers */,
 				1FA42A97192A7E1200F673A0 /* AAPLAction.h in Headers */,
 				1FA42AB9192A7E1200F673A0 /* AAPLSegmentedDataSource.h in Headers */,
+				E1178C201A79ADBB000F6748 /* AAPLCollectionViewSectionedGridLayout.h in Headers */,
 				1FA42AB4192A7E1200F673A0 /* AAPLComposedDataSource_Private.h in Headers */,
 				1FE17C0E1931885100620DC3 /* AAPLCatSighting.h in Headers */,
 				1FA42ACA192A7E1200F673A0 /* AAPLCollectionViewController.h in Headers */,
@@ -598,6 +605,7 @@
 				1FA42AB1192A7E1200F673A0 /* AAPLBasicDataSource.m in Sources */,
 				1FA42ADD192A7E1200F673A0 /* AAPLPinnableHeaderView.m in Sources */,
 				1FA42AE5192A7E1200F673A0 /* AAPLSegmentedHeaderView.m in Sources */,
+				E1178C211A79ADBB000F6748 /* AAPLCollectionViewSectionedGridLayout.m in Sources */,
 				1FA42B03192A9D2200F673A0 /* AAPLCat.m in Sources */,
 				1FA42AD6192A7E1200F673A0 /* AAPLCollectionViewCell.m in Sources */,
 				1FA42ADF192A7E1200F673A0 /* AAPLPlaceholderView.m in Sources */,

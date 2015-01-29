@@ -72,6 +72,7 @@ NSInteger const AAPLGlobalSection = NSIntegerMax;
         unsigned int selectedBackgroundColor : 1;
         unsigned int separatorColor : 1;
         unsigned int sectionSeparatorColor : 1;
+        unsigned int foregroundColor : 1;
     } _flags;
 }
 
@@ -110,6 +111,7 @@ NSInteger const AAPLGlobalSection = NSIntegerMax;
     metrics->_rowHeight = _rowHeight;
     metrics->_numberOfColumns = _numberOfColumns;
     metrics->_padding = _padding;
+    metrics->_interItemSpacing = _interItemSpacing;
     metrics->_showsColumnSeparator = _showsColumnSeparator;
     metrics->_separatorInsets = _separatorInsets;
     metrics->_backgroundColor = _backgroundColor;
@@ -137,6 +139,12 @@ NSInteger const AAPLGlobalSection = NSIntegerMax;
 {
     _selectedBackgroundColor = selectedBackgroundColor;
     _flags.selectedBackgroundColor = YES;
+}
+
+- (void)setForegroundColor:(UIColor *)foregroundColor
+{
+    _foregroundColor = foregroundColor;
+    _flags.foregroundColor = YES;
 }
 
 - (void)setSeparatorColor:(UIColor *)separatorColor
@@ -184,6 +192,9 @@ NSInteger const AAPLGlobalSection = NSIntegerMax;
 
     if (!UIEdgeInsetsEqualToEdgeInsets(metrics.padding, UIEdgeInsetsZero))
         self.padding = metrics.padding;
+    
+    if (metrics.interItemSpacing)
+        self.interItemSpacing = metrics.interItemSpacing;
 
     if (!UIEdgeInsetsEqualToEdgeInsets(metrics.separatorInsets, UIEdgeInsetsZero))
         self.separatorInsets = metrics.separatorInsets;
@@ -202,6 +213,9 @@ NSInteger const AAPLGlobalSection = NSIntegerMax;
 
     if (metrics->_flags.selectedBackgroundColor)
         self.selectedBackgroundColor = metrics.selectedBackgroundColor;
+    
+    if (metrics->_flags.foregroundColor)
+        self.foregroundColor = metrics.foregroundColor;
 
     if (metrics->_flags.sectionSeparatorColor)
         self.sectionSeparatorColor = metrics.sectionSeparatorColor;

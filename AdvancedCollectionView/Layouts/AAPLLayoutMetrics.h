@@ -91,6 +91,9 @@ typedef void (^AAPLLayoutSupplementaryItemConfigurationBlock)(UICollectionReusab
 /// Padding around the cells for this section. The top & bottom padding will be applied between the headers & footers and the cells. The left & right padding will be applied between the view edges and the cells.
 @property (nonatomic) UIEdgeInsets padding;
 
+/// Spacing between the cells in this section.
+@property (nonatomic) CGFloat interItemSpacing;
+
 /// Should a column separator be drawn. Default is YES.
 @property (nonatomic) BOOL showsColumnSeparator;
 

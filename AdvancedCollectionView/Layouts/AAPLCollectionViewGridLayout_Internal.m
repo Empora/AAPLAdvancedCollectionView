@@ -119,6 +119,11 @@
     UIEdgeInsets margins = self.insets;
     NSInteger numberOfColumns = self.numberOfColumns;
     CGFloat columnWidth = (width - margins.left - margins.right) / numberOfColumns;
+    
+    if (self.interItemSpacing) {
+        columnWidth = columnWidth - self.interItemSpacing*(numberOfColumns/(numberOfColumns-1));
+    }
+    
     return columnWidth;
 }
 

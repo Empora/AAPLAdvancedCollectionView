@@ -65,6 +65,7 @@ typedef CGSize (^AAPLLayoutMeasureBlock)(NSInteger itemIndex, CGRect frame);
 @property (nonatomic, strong) AAPLGridLayoutSupplementalItemInfo *placeholder;
 @property (nonatomic) NSInteger numberOfColumns;
 @property (nonatomic) UIEdgeInsets insets;
+@property (nonatomic) CGFloat interItemSpacing;
 
 @property (nonatomic) UIEdgeInsets separatorInsets;
 @property (nonatomic) UIEdgeInsets sectionSeparatorInsets;

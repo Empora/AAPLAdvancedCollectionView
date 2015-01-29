@@ -185,6 +185,7 @@
 
 - (void)didTouchMoreEditAction:(UIButton *)moreButton
 {
+#ifndef AAPL_APPEXTENSION
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:nil];
 
     NSMutableArray *actions = [NSMutableArray arrayWithCapacity:[_cell.editActions count] - 1];
@@ -200,6 +201,7 @@
     actionSheet.cancelButtonIndex = [actionSheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"Cancel button")];
 
     [actionSheet showInView:self];
+#endif
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex

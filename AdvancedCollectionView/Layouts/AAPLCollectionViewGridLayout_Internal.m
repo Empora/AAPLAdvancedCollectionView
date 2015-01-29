@@ -208,16 +208,16 @@
             }
 
             if (!(columnIndex % numberOfColumns)) {
-                originY += rowHeight;
+                originY += rowHeight + self.interItemSpacing;
                 rowHeight = 0;
                 columnIndex = 0;
                 
                 switch (_cellLayoutOrder) {
                     case AAPLCellLayoutOrderLeftToRight:
-                        originX = margins.left;
+                        originX = margins.left + self.interItemSpacing;
                         break;
                     case AAPLCellLayoutOrderRightToLeft:
-                        originX = width - margins.right - columnWidth;
+                        originX = width - margins.right - columnWidth - self.interItemSpacing;
                         break;
                 }
 

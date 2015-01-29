@@ -214,10 +214,10 @@
                 
                 switch (_cellLayoutOrder) {
                     case AAPLCellLayoutOrderLeftToRight:
-                        originX = margins.left + self.interItemSpacing;
+                        originX = margins.left;
                         break;
                     case AAPLCellLayoutOrderRightToLeft:
-                        originX = width - margins.right - columnWidth - self.interItemSpacing;
+                        originX = width - margins.right - columnWidth;
                         break;
                 }
 
@@ -257,10 +257,10 @@
 
             switch (_cellLayoutOrder) {
                 case AAPLCellLayoutOrderLeftToRight:
-                    originX += columnWidth;
+                    originX += columnWidth + self.interItemSpacing;
                     break;
                 case AAPLCellLayoutOrderRightToLeft:
-                    originX -= columnWidth;
+                    originX -= columnWidth + self.interItemSpacing;
                     break;
             }
 

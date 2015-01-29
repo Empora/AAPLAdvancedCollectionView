@@ -23,8 +23,11 @@
 
     if (!target)
         return NO;
-
+#ifndef AAPL_APPEXTENSION
     return [[UIApplication sharedApplication] sendAction:action to:target from:sender forEvent:nil];
+#else
+    return [target performSelector:action withObject:self];
+#endif
 }
 
 @end

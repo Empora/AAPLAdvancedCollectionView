@@ -121,7 +121,7 @@
     CGFloat columnWidth = (width - margins.left - margins.right) / numberOfColumns;
     
     if (self.interItemSpacing) {
-        columnWidth = columnWidth - self.interItemSpacing*(numberOfColumns/(numberOfColumns-1));
+        columnWidth = columnWidth - self.interItemSpacing*(numberOfColumns-1)/numberOfColumns;
     }
     
     return columnWidth;

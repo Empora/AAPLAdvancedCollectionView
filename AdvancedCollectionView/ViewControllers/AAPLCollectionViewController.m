@@ -62,6 +62,12 @@ static void * const AAPLDataSourceContext = @"DataSourceContext";
         [dataSource registerReusableViewsWithCollectionView:collectionView];
         [dataSource setNeedsLoadContent];
     }
+    
+    if (self.clearsSelectionOnViewWillAppear) {
+        for (NSIndexPath* aIndexPath in [[self.collectionView indexPathsForSelectedItems] copy]) {
+            [self.collectionView deselectItemAtIndexPath:aIndexPath animated:animated];
+        }
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -144,6 +150,25 @@ static void * const AAPLDataSourceContext = @"DataSourceContext";
 - (void)willDismissActionSheetFromCell:(UICollectionViewCell *)cell
 {
     [_swipeStateMachine shutActionPaneForEditingCellAnimated:YES];
+}
+
+#pragma mark - UIScrollView
+
+- (void) scrollViewDidScroll:(UIScrollView *)scrollView{
+    if (!self.endlessScrollingEnabled) {
+        return;
+    }
+    
+    CGFloat limit = scrollView.frame.size.height;
+    BOOL limitReached = (scrollView.contentSize.height-scrollView.contentOffset.y-scrollView.frame.size.height) < limit;
+    if (limitReached) {
+        if([self.collectionView.dataSource isKindOfClass:[AAPLDataSource class]]){
+            AAPLDataSource* dataSource = (AAPLDataSource*) self.collectionView.dataSource;
+            if (dataSource) {
+                [dataSource loadContent];
+            }
+        }
+    }
 }
 
 #pragma mark - UICollectionViewDelegate methods

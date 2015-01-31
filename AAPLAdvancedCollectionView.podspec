@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
                    DESC
   s.homepage     = "https://developer.apple.com/wwdc/resources/sample-code/"
   s.license      = { :type => "Apple Sample Code", :file => "LICENSE.txt" }
-  s.authors      = {"Apple", "Robert Biehl" => "robert.biehl@empora.com"}
+  s.authors      = {"Apple" => "info@apple.com", "Robert Biehl" => "robert.biehl@empora.com"}
   s.platform     = :ios, "7.0"
   s.source       = { :git => "https://github.com/empora/AAPLAdvancedCollectionView.git", :tag => "v{s.version}" }
   s.source_files = "AdvancedCollectionView/{Categories,DataSources,Layouts,Views,ViewControllers}/*.{h,m}", "AdvancedCollectionView/AAPL{ContentLoading,StateMachine,Action}.{h,m}"

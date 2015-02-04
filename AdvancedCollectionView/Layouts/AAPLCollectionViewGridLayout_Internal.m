@@ -208,7 +208,7 @@
             }
 
             if (!(columnIndex % numberOfColumns)) {
-                originY += rowHeight + self.interItemSpacing;
+                originY += rowHeight + (itemIndex!=0 ? self.interItemSpacing : 0);
                 rowHeight = 0;
                 columnIndex = 0;
                 

@@ -332,6 +332,11 @@ static void * const AAPLDataSourceContext = @"DataSourceContext";
 
 - (void)dataSource:(AAPLDataSource *)dataSource performBatchUpdate:(dispatch_block_t)update complete:(dispatch_block_t)complete
 {
+    // ignore updates from unknown datasources.
+    if (dataSource!=self.collectionView.dataSource) {
+        return;
+    }
+    
     [self.collectionView performBatchUpdates:^{
         update();
     } completion:^(BOOL finished){

@@ -17,7 +17,7 @@
 @property (nonatomic, retain) NSMapTable *dataSourceToMappings;
 @property (nonatomic, retain) NSMutableDictionary *globalSectionToMappings;
 @property (nonatomic, assign) NSUInteger sectionCount;
-
+@property (nonatomic) BOOL loadingComplete;
 @property (nonatomic, strong) NSString *aggregateLoadingState;
 @end
 
@@ -507,6 +507,7 @@
             [self executePendingUpdates];
         }];
 
+    self.loadingComplete = YES;
     [self notifyContentLoadedWithError:error];
 }
 

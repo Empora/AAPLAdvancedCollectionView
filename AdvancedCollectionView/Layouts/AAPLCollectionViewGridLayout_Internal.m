@@ -269,18 +269,17 @@
         }
 
         originY += rowHeight + margins.bottom;
+    }
 
-        // lay out all footers
-        for (AAPLGridLayoutSupplementalItemInfo *footerInfo in self.footers) {
-            // skip hidden footers
-            if (footerInfo.hidden)
-                continue;
-            // When showing the placeholder, we don't show footers
-            CGFloat height = footerInfo.height;
-            footerInfo.frame = CGRectMake(0, originY, width, height);
-            originY += height;
-        }
-
+    // lay out all footers
+    for (AAPLGridLayoutSupplementalItemInfo *footerInfo in self.footers) {
+        // skip hidden footers
+        if (footerInfo.hidden)
+            continue;
+        // When showing the placeholder, we don't show footers
+        CGFloat height = footerInfo.height;
+        footerInfo.frame = CGRectMake(0, originY, width, height);
+        originY += height;
     }
 
     self.frame = CGRectMake(0, start, width, originY - start);

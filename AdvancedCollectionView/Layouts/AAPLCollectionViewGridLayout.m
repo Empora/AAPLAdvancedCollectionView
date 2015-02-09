@@ -1159,7 +1159,7 @@ typedef NS_ENUM(NSInteger, AAPLAutoScrollDirection) {
 - (void)resetLayoutInfo
 {
     if (!_layoutInfo)
-        _layoutInfo = [[AAPLGridLayoutInfo alloc] init];
+        _layoutInfo = [[[self layoutInfoClass] alloc] init];
     else
         [_layoutInfo invalidate];
     
@@ -1859,6 +1859,12 @@ typedef NS_ENUM(NSInteger, AAPLAutoScrollDirection) {
 {
     _updateSectionDirections[@(section)] = @(direction);
     _updateSectionDirections[@(newSection)] = @(direction);
+}
+
+
+// Added function that enables subclassing and replacing layoutSectionInfoClass
+-(Class)layoutInfoClass {
+    return [AAPLGridLayoutInfo class];
 }
 
 @end

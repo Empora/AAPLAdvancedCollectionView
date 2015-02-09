@@ -99,7 +99,8 @@ typedef CGSize (^AAPLLayoutMeasureBlock)(NSInteger itemIndex, CGRect frame);
 @property (nonatomic, strong) NSMutableDictionary *sections;
 
 - (AAPLGridLayoutSectionInfo *)addSectionWithIndex:(NSInteger)sectionIndex;
-
 - (void)invalidate;
 
+// Added function that enables subclassing and replacing layoutSectionInfoClass
+-(Class)layoutSectionInfoClass;
 @end

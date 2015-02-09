@@ -20,4 +20,6 @@
 /// Is the layout in editing mode? Default is NO.
 @property (nonatomic, getter = isEditing) BOOL editing;
 
+// Added by Empora
+-(Class)layoutInfoClass;
 @end

@@ -336,7 +336,7 @@
 
 - (AAPLGridLayoutSectionInfo *)addSectionWithIndex:(NSInteger)sectionIndex
 {
-    AAPLGridLayoutSectionInfo *section = [[AAPLGridLayoutSectionInfo alloc] init];
+    AAPLGridLayoutSectionInfo *section = [[[self layoutSectionInfoClass] alloc] init];
     section.layoutInfo = self;
     self.sections[@(sectionIndex)] = section;
     return section;
@@ -366,5 +366,10 @@
     }
 
     return result;
+}
+
+// Added function that enables subclassing and replacing SectionInfoClass
+-(Class)layoutSectionInfoClass {
+    return [AAPLGridLayoutSectionInfo class];
 }
 @end

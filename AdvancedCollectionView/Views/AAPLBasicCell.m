@@ -134,9 +134,26 @@
          */
     }
     else {
-        [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-Left-[_primaryLabel]-(>=Right)-|" options:0 metrics:metrics views:views]];
-        [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-Left-[_secondaryLabel]-(>=Right)-|" options:0 metrics:metrics views:views]];
-        [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-Top-[_primaryLabel][_secondaryLabel]-Bottom-|" options:0 metrics:metrics views:views]];
+        NSArray* mainConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-Left-[_imageView(imageWidth)]-(padding)-[_primaryLabel]-(>=Right)-|" options:0 metrics:metrics views:views];
+        for (NSLayoutConstraint* constraint in mainConstraints) {
+            if (constraint.firstAttribute == NSLayoutAttributeLeading && constraint.firstItem == _primaryLabel) {
+                _primaryLabelLeadingMarginConstraint = constraint;
+                break;
+            }
+        }
+        [_constraints addObjectsFromArray:mainConstraints];
+        
+        [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-Top-[_primaryLabel][_secondaryLabel]-Bottom-|" options:NSLayoutFormatAlignAllLeft metrics:metrics views:views]];
+        
+        [_constraints addObject:[NSLayoutConstraint constraintWithItem:_imageView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:contentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0]];
+        [_constraints addObject:[NSLayoutConstraint constraintWithItem:_imageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:_imageView attribute:NSLayoutAttributeHeight multiplier:1.0 constant:0]];
+        /*
+         [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-Left-[_primaryLabel]-(>=Right)-|" options:0 metrics:metrics views:views]];
+         [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-Left-[_secondaryLabel]-(>=Right)-|" options:0 metrics:metrics views:views]];
+         [_constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-Top-[_primaryLabel][_secondaryLabel]-Bottom-|" options:0 metrics:metrics views:views]];
+         */
+        
+        
     }
     
     [contentView addConstraints:_constraints];
@@ -149,6 +166,11 @@
         [self.contentView removeConstraints:_constraints];
     _constraints = nil;
     [super setNeedsUpdateConstraints];
+}
+
+- (void) prepareForReuse{
+    [super prepareForReuse];
+    self.style = AAPLBasicCellStyleDefault;
 }
 
 #pragma mark KeyValueObserving

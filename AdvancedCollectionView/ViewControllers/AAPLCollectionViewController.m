@@ -44,12 +44,6 @@ static void * const AAPLDataSourceContext = @"DataSourceContext";
 - (void)dealloc
 {
     [_currentCollectionView removeObserver:self forKeyPath:@"dataSource" context:AAPLDataSourceContext];
-
-    if (_currentCollectionView == nil) {
-        NSLog(@"collection view nil");
-    } else {
-        NSLog(@"collection view observer removed");
-    }
 }
 
 - (void)loadView

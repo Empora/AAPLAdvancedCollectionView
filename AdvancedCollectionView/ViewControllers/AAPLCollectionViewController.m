@@ -43,6 +43,7 @@ static void * const AAPLDataSourceContext = @"DataSourceContext";
 
 - (void)dealloc
 {
+    // use an instance variable copy of self.collectionView to avoid getting being called in dealloc
     [_currentCollectionView removeObserver:self forKeyPath:@"dataSource" context:AAPLDataSourceContext];
 }
 

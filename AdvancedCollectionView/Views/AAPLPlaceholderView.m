@@ -345,7 +345,7 @@
     }
 }
 
-- (void)showPlaceholderWithTitle:(NSString *)title message:(NSString *)message image:(UIImage *)image animated:(BOOL)animated
+- (void)showPlaceholderWithTitle:(NSString *)title message:(NSString *)message image:(UIImage *)image buttonTitle:(NSString *)buttonTitle buttonAction:(dispatch_block_t)buttonAction animated:(BOOL)animated
 {
     AAPLPlaceholderView *oldPlaceHolder = self.placeholderView;
 
@@ -354,7 +354,7 @@
 
     [self showActivityIndicator:NO];
 
-    self.placeholderView = [[AAPLPlaceholderView alloc] initWithFrame:CGRectZero title:title message:message image:image buttonTitle:nil buttonAction:nil];
+    self.placeholderView = [[AAPLPlaceholderView alloc] initWithFrame:CGRectZero title:title message:message image:image buttonTitle:buttonTitle buttonAction:buttonAction];
     _placeholderView.alpha = 0.0;
     _placeholderView.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:_placeholderView];
@@ -420,7 +420,7 @@
     }
 }
 
-- (void)showPlaceholderWithTitle:(NSString *)title message:(NSString *)message image:(UIImage *)image animated:(BOOL)animated
+- (void)showPlaceholderWithTitle:(NSString *)title message:(NSString *)message image:(UIImage *)image buttonTitle:(NSString *)buttonTitle buttonAction:(dispatch_block_t)buttonAction animated:(BOOL)animated
 {
     UIView *contentView = self.contentView;
 
@@ -429,7 +429,7 @@
     if (oldPlaceHolder && [oldPlaceHolder.title isEqualToString:title] && [oldPlaceHolder.message isEqualToString:message])
         return;
 
-    self.placeholderView = [[AAPLPlaceholderView alloc] initWithFrame:CGRectZero title:title message:message image:image buttonTitle:nil buttonAction:nil];
+    self.placeholderView = [[AAPLPlaceholderView alloc] initWithFrame:CGRectZero title:title message:message image:image buttonTitle:buttonTitle buttonAction:buttonAction];
     _placeholderView.alpha = 0.0;
     _placeholderView.translatesAutoresizingMaskIntoConstraints = NO;
     [contentView addSubview:_placeholderView];

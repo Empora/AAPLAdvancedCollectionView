@@ -19,9 +19,6 @@
 static void * const AAPLDataSourceContext = @"DataSourceContext";
 
 @interface AAPLCollectionViewController () <UICollectionViewDelegate, AAPLDataSourceDelegate>
-{
-//    UICollectionView *_currentCollectionView;
-}
 @property (nonatomic, strong) AAPLSwipeToEditStateMachine *swipeStateMachine;
 @end
 
@@ -43,11 +40,8 @@ static void * const AAPLDataSourceContext = @"DataSourceContext";
 
 - (void)dealloc
 {
-    // use an instance variable copy of self.collectionView to avoid getting being called in dealloc
     if (self.isViewLoaded) {
         [self.collectionView removeObserver:self forKeyPath:@"dataSource" context:AAPLDataSourceContext];
-    } else {
-        NSLog(@"view not loaded");
     }
 }
 
@@ -60,7 +54,6 @@ static void * const AAPLDataSourceContext = @"DataSourceContext";
                              options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
                              context:AAPLDataSourceContext];
     
-//    _currentCollectionView = self.collectionView;
     _swipeStateMachine = [[AAPLSwipeToEditStateMachine alloc] initWithCollectionView:self.collectionView];
 }
 
@@ -101,8 +94,6 @@ static void * const AAPLDataSourceContext = @"DataSourceContext";
     
     //  We need to know when the data source changes on the collection view so we can become the delegate for any APPLDataSource subclasses.
     [collectionView addObserver:self forKeyPath:@"dataSource" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:AAPLDataSourceContext];
-
-//    _currentCollectionView = self.collectionView;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

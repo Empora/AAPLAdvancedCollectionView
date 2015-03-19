@@ -577,7 +577,8 @@
     if (self.shouldDisplayPlaceholder) {
         __weak typeof(&*self) weakself = self;
         [self enqueuePendingUpdateBlock:^{
-            [weakself notifyItemsRemovedAtIndexPaths:removedIndexPaths];
+            // Causes Crashes
+            //[weakself notifyItemsRemovedAtIndexPaths:removedIndexPaths];
         }];
         return;
     }

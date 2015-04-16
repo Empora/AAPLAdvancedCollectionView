@@ -40,7 +40,9 @@ static void * const AAPLDataSourceContext = @"DataSourceContext";
 
 - (void)dealloc
 {
-    [self.collectionView removeObserver:self forKeyPath:@"dataSource" context:AAPLDataSourceContext];
+    if (self.isViewLoaded) {
+        [self.collectionView removeObserver:self forKeyPath:@"dataSource" context:AAPLDataSourceContext];
+    }
 }
 
 - (void)loadView

@@ -49,7 +49,11 @@ static void * const AAPLDataSourceContext = @"DataSourceContext";
 {
     [super loadView];
     //  We need to know when the data source changes on the collection view so we can become the delegate for any APPLDataSource subclasses.
-    [self.collectionView addObserver:self forKeyPath:@"dataSource" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:AAPLDataSourceContext];
+    [self.collectionView addObserver:self
+                          forKeyPath:@"dataSource"
+                             options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew
+                             context:AAPLDataSourceContext];
+    
     _swipeStateMachine = [[AAPLSwipeToEditStateMachine alloc] initWithCollectionView:self.collectionView];
 }
 

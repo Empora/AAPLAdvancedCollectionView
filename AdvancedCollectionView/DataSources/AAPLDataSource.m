@@ -492,6 +492,8 @@
 {
     NSString *message;
     NSString *title;
+    NSString *buttonTitle;
+    dispatch_block_t  buttonAction;
 
     if (placeholderView) {
         NSString *loadingState = self.loadingState;
@@ -503,12 +505,18 @@
         if ([loadingState isEqualToString:AAPLLoadStateNoContent]) {
             title = self.noContentTitle;
             message = self.noContentMessage;
-            [placeholderView showPlaceholderWithTitle:title message:message image:self.noContentImage animated:YES];
+            buttonTitle = self.noContentButtonTitle;
+            buttonAction = self.noContentButtonAction;
+            
+            [placeholderView showPlaceholderWithTitle:title message:message image:self.noContentImage buttonTitle:buttonTitle buttonAction:buttonAction animated:YES];
         }
         else if ([loadingState isEqualToString:AAPLLoadStateError]) {
             title = self.errorTitle;
             message = self.errorMessage;
-            [placeholderView showPlaceholderWithTitle:title message:message image:self.noContentImage animated:YES];
+            buttonTitle = self.errorButtonTitle;
+            buttonAction = self.errorButtonAction;
+            
+            [placeholderView showPlaceholderWithTitle:title message:message image:self.noContentImage buttonTitle:buttonTitle buttonAction:buttonAction animated:YES];
         }
         else
             [placeholderView hidePlaceholderAnimated:YES];
@@ -577,8 +585,8 @@
     if (self.shouldDisplayPlaceholder) {
         __weak typeof(&*self) weakself = self;
         [self enqueuePendingUpdateBlock:^{
-            // Causes Crashes
-            //[weakself notifyItemsRemovedAtIndexPaths:removedIndexPaths];
+            // causes crash - ToDo find solution
+            //            [weakself notifyItemsRemovedAtIndexPaths:removedIndexPaths];
         }];
         return;
     }

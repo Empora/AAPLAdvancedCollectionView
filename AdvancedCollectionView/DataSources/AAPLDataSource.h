@@ -14,6 +14,7 @@
 
 @class AAPLCollectionPlaceholderView;
 
+IB_DESIGNABLE
 @interface AAPLDataSource : NSObject <UICollectionViewDataSource, AAPLContentLoading>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
@@ -81,16 +82,16 @@
 
 #pragma mark - Placeholders
 
-@property (nonatomic, copy) NSString *noContentTitle;
-@property (nonatomic, copy) NSString *noContentMessage;
-@property (nonatomic, strong) UIImage *noContentImage;
-@property (nonatomic, copy) NSString *noContentButtonTitle;
+@property (nonatomic, copy) IBInspectable NSString *noContentTitle;
+@property (nonatomic, copy) IBInspectable NSString *noContentMessage;
+@property (nonatomic, strong) IBInspectable UIImage *noContentImage;
+@property (nonatomic, copy) IBInspectable NSString *noContentButtonTitle;
 @property (nonatomic, copy) void (^noContentButtonAction)(void);
 
-@property (nonatomic, copy) NSString *errorMessage;
-@property (nonatomic, copy) NSString *errorTitle;
-@property (nonatomic, strong) UIImage *errorImage;
-@property (nonatomic, copy) NSString *errorButtonTitle;
+@property (nonatomic, copy) IBInspectable NSString *errorMessage;
+@property (nonatomic, copy) IBInspectable NSString *errorTitle;
+@property (nonatomic, strong) IBInspectable UIImage *errorImage;
+@property (nonatomic, copy) IBInspectable NSString *errorButtonTitle;
 @property (nonatomic, copy) void (^errorButtonAction)(void);
 
 /// Is this data source "hidden" by a placeholder either of its own or from an enclosing data source. Use this to determine whether to report that there are no items in your data source while loading.

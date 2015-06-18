@@ -92,14 +92,26 @@
 - (AAPLCatListDataSource *)newFavoriteCatsDataSource
 {
     AAPLCatListDataSource *dataSource = [[AAPLCatListDataSource alloc] init];
+    __weak AAPLBasicDataSource* weakDataSource = dataSource;
     dataSource.showingFavorites = YES;
 
     dataSource.title = NSLocalizedString(@"Favorites", @"Title for favorite cats list");
     dataSource.noContentMessage = NSLocalizedString(@"You have no favorite cats. Tap the star icon to add a cat to your list of favorites.", @"The message to show when no cats are available");
     dataSource.noContentTitle = NSLocalizedString(@"No Favorites", @"The title to show when no cats are available");
+    
+    dataSource.noContentButtonTitle = NSLocalizedString(@"Check out some cats", @"Title of button to show when no cats are available");
+    dataSource.noContentButtonAction = ^(){
+        self.segmentedDataSource.selectedDataSourceIndex = 0;
+    };
+    
     dataSource.errorMessage = NSLocalizedString(@"A problem with the network prevented loading your favorite cats. Please check your network settings.", @"Message to show when unable to load favorite cats");
     dataSource.errorTitle = NSLocalizedString(@"Unable To Favorites", @"Title of message to show when unable to load favorites");
 
+    dataSource.errorButtonTitle = NSLocalizedString(@"Try to reload", @"Title of button to show when unable to load favorites");
+    dataSource.errorButtonAction = ^(){
+        [weakDataSource loadContent];
+    };
+    
     return dataSource;
 }
 

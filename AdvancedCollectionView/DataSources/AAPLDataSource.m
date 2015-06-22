@@ -516,7 +516,7 @@
             buttonTitle = self.errorButtonTitle;
             buttonAction = self.errorButtonAction;
             
-            [placeholderView showPlaceholderWithTitle:title message:message image:self.noContentImage buttonTitle:buttonTitle buttonAction:buttonAction animated:YES];
+            [placeholderView showPlaceholderWithTitle:title message:message image:self.errorImage buttonTitle:buttonTitle buttonAction:buttonAction animated:YES];
         }
         else
             [placeholderView hidePlaceholderAnimated:YES];

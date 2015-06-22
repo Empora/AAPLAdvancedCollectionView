@@ -10,20 +10,13 @@
 
 #import "AAPLPlaceholderView.h"
 
+#import "AAPLPlaceholderView+Internal.h"
+
 #define CORNER_RADIUS 3.0
 #define VERTICAL_ELEMENT_SPACING 35.0
 #define CONTINUOUS_CURVES_SIZE_FACTOR (1.528665)
 #define BUTTON_WIDTH 124
 #define BUTTON_HEIGHT 29
-
-@interface AAPLPlaceholderView ()
-@property (nonatomic, strong) UIView *containerView;
-@property (nonatomic, strong) UIImageView *imageView;
-@property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UILabel *messageLabel;
-@property (nonatomic, strong) UIButton *actionButton;
-@property (nonatomic, strong) NSArray *constraints;
-@end
 
 @implementation AAPLPlaceholderView
 
@@ -53,7 +46,9 @@
     _containerView = [[UIView alloc] initWithFrame:CGRectZero];
     _containerView.translatesAutoresizingMaskIntoConstraints = NO;
 
-    UIColor *textColor = [UIColor colorWithWhite:172/255.0 alpha:1];
+    if (!self.textColor) {
+        self.textColor = [UIColor colorWithWhite:172/255.0 alpha:1];
+    }
 
     _imageView = [[UIImageView alloc] initWithImage:_image];
     _imageView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -66,7 +61,7 @@
     _titleLabel.font = [UIFont systemFontOfSize:22.0];
     _titleLabel.numberOfLines = 0;
     _titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    _titleLabel.textColor = textColor;
+    _titleLabel.textColor = self.textColor;
     [_containerView addSubview:_titleLabel];
 
     _messageLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -76,7 +71,7 @@
     _messageLabel.font = [UIFont systemFontOfSize:14];
     _messageLabel.numberOfLines = 0;
     _messageLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    _messageLabel.textColor = textColor;
+    _messageLabel.textColor = self.textColor;
     [_containerView addSubview:_messageLabel];
 
     _actionButton = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -85,8 +80,8 @@
     _actionButton.titleLabel.font = [UIFont systemFontOfSize:14];
     _actionButton.translatesAutoresizingMaskIntoConstraints = NO;
     _actionButton.contentEdgeInsets = UIEdgeInsetsMake(0, 16, 0, 16);
-    [_actionButton setBackgroundImage:[self _buttonBackgroundImageWithColor:textColor] forState:UIControlStateNormal];
-    [_actionButton setTitleColor:textColor forState:UIControlStateNormal];
+    [_actionButton setBackgroundImage:[self _buttonBackgroundImageWithColor:self.textColor] forState:UIControlStateNormal];
+    [_actionButton setTitleColor:self.textColor forState:UIControlStateNormal];
     [_containerView addSubview:_actionButton];
 
     [self addSubview:_containerView];
@@ -96,8 +91,11 @@
     // Constrain the container to the host view. The height of the container will be determined by the contents.
     NSMutableArray *constraints = [NSMutableArray array];
 
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0]];
-    [constraints addObject:[NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0]];
+    NSLayoutConstraint* centerXConstraint = [NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
+    NSLayoutConstraint* centerYConstraint = [NSLayoutConstraint constraintWithItem:_containerView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0];
+    centerYConstraint.priority = UILayoutPriorityDefaultLow;
+    [constraints addObject:centerXConstraint];
+    [constraints addObject:centerYConstraint];
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
         // _containerView should be no more than 418pt and the left and right padding should be no less than 30pt on both sides
@@ -150,21 +148,33 @@
 
     if (_title) {
         [_containerView addSubview:_titleLabel];
-        _titleLabel.text = _title;
+        if (_titleTextAttributes) {
+            _titleLabel.attributedText = [[NSAttributedString alloc] initWithString:_title attributes:_titleTextAttributes];
+        } else {
+            _titleLabel.text = _title;
+        }
     }
     else
         [_titleLabel removeFromSuperview];
 
     if (_message) {
         [_containerView addSubview:_messageLabel];
-        _messageLabel.text = _message;
+        if (_messageTextAttributes) {
+            _messageLabel.attributedText = [[NSAttributedString alloc] initWithString:_message attributes:_messageTextAttributes];
+        } else {
+            _messageLabel.text = _message;
+        }
     }
     else
         [_messageLabel removeFromSuperview];
 
     if (_buttonTitle) {
         [_containerView addSubview:_actionButton];
-        [_actionButton setTitle:_buttonTitle forState:UIControlStateNormal];
+        if (_buttonTitleTextAttributes) {
+            [_actionButton setAttributedTitle:[[NSAttributedString alloc] initWithString:_buttonTitle attributes:_buttonTitleTextAttributes] forState:UIControlStateNormal];
+        } else {
+            [_actionButton setTitle:_buttonTitle forState:UIControlStateNormal];
+        }
     }
     else {
         [_actionButton removeFromSuperview];
@@ -296,6 +306,10 @@
 
 @implementation AAPLCollectionPlaceholderView
 
+- (Class) placeholderViewClass{
+    return [AAPLPlaceholderView class];
+}
+
 - (void)showActivityIndicator:(BOOL)show
 {
     if (!_activityIndicatorView) {
@@ -354,7 +368,7 @@
 
     [self showActivityIndicator:NO];
 
-    self.placeholderView = [[AAPLPlaceholderView alloc] initWithFrame:CGRectZero title:title message:message image:image buttonTitle:buttonTitle buttonAction:buttonAction];
+    self.placeholderView = [[[self placeholderViewClass] alloc] initWithFrame:CGRectZero title:title message:message image:image buttonTitle:buttonTitle buttonAction:buttonAction];
     _placeholderView.alpha = 0.0;
     _placeholderView.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:_placeholderView];

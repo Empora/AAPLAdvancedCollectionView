@@ -114,7 +114,18 @@
 		E1178C201A79ADBB000F6748 /* AAPLCollectionViewSectionedGridLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = E1178C1E1A79ADBB000F6748 /* AAPLCollectionViewSectionedGridLayout.h */; };
 		E1178C211A79ADBB000F6748 /* AAPLCollectionViewSectionedGridLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E1178C1F1A79ADBB000F6748 /* AAPLCollectionViewSectionedGridLayout.m */; };
 		E11833161B34388000E2994D /* PlaceHolderTest.xib in Resources */ = {isa = PBXBuildFile; fileRef = E11833151B34388000E2994D /* PlaceHolderTest.xib */; };
+		E1DB577C1B67E87B002587FC /* AdvancedCollectionView_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DB577B1B67E87B002587FC /* AdvancedCollectionView_Tests.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E1DB577D1B67E87B002587FC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1FA42960192A798300F673A0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1FA42968192A798300F673A0;
+			remoteInfo = AdvancedCollectionView;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1FA42969192A798300F673A0 /* AdvancedCollectionView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdvancedCollectionView.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -227,11 +238,21 @@
 		E1178C1F1A79ADBB000F6748 /* AAPLCollectionViewSectionedGridLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPLCollectionViewSectionedGridLayout.m; sourceTree = "<group>"; };
 		E11833151B34388000E2994D /* PlaceHolderTest.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaceHolderTest.xib; sourceTree = "<group>"; };
 		E18CA4BF19AE0C4E000E4BED /* AAPLAdvancedCollectionView.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AAPLAdvancedCollectionView.podspec; sourceTree = SOURCE_ROOT; };
+		E1DB57771B67E87B002587FC /* AdvancedCollectionView Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AdvancedCollectionView Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1DB577A1B67E87B002587FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E1DB577B1B67E87B002587FC /* AdvancedCollectionView_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdvancedCollectionView_Tests.m; sourceTree = "<group>"; };
 		E1EAA8D11B34110200167DB2 /* AAPLPlaceholderView+Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AAPLPlaceholderView+Internal.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		1FA42965192A798300F673A0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E1DB57741B67E87B002587FC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -246,6 +267,7 @@
 			children = (
 				3E4EC381193D3D990070862B /* README.md */,
 				1FA4296B192A798300F673A0 /* AdvancedCollectionView */,
+				E1DB57781B67E87B002587FC /* AdvancedCollectionView Tests */,
 				1FA4296A192A798300F673A0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -254,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				1FA42969192A798300F673A0 /* AdvancedCollectionView.app */,
+				E1DB57771B67E87B002587FC /* AdvancedCollectionView Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -446,6 +469,23 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		E1DB57781B67E87B002587FC /* AdvancedCollectionView Tests */ = {
+			isa = PBXGroup;
+			children = (
+				E1DB577B1B67E87B002587FC /* AdvancedCollectionView_Tests.m */,
+				E1DB57791B67E87B002587FC /* Supporting Files */,
+			);
+			path = "AdvancedCollectionView Tests";
+			sourceTree = "<group>";
+		};
+		E1DB57791B67E87B002587FC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E1DB577A1B67E87B002587FC /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -523,6 +563,24 @@
 			productReference = 1FA42969192A798300F673A0 /* AdvancedCollectionView.app */;
 			productType = "com.apple.product-type.application";
 		};
+		E1DB57761B67E87B002587FC /* AdvancedCollectionView Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E1DB577F1B67E87B002587FC /* Build configuration list for PBXNativeTarget "AdvancedCollectionView Tests" */;
+			buildPhases = (
+				E1DB57731B67E87B002587FC /* Sources */,
+				E1DB57741B67E87B002587FC /* Frameworks */,
+				E1DB57751B67E87B002587FC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E1DB577E1B67E87B002587FC /* PBXTargetDependency */,
+			);
+			name = "AdvancedCollectionView Tests";
+			productName = "AdvancedCollectionView Tests";
+			productReference = E1DB57771B67E87B002587FC /* AdvancedCollectionView Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -531,6 +589,12 @@
 			attributes = {
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = Apple;
+				TargetAttributes = {
+					E1DB57761B67E87B002587FC = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = 1FA42968192A798300F673A0;
+					};
+				};
 			};
 			buildConfigurationList = 1FA42963192A798300F673A0 /* Build configuration list for PBXProject "AdvancedCollectionView" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -546,6 +610,7 @@
 			projectRoot = "";
 			targets = (
 				1FA42968192A798300F673A0 /* AdvancedCollectionView */,
+				E1DB57761B67E87B002587FC /* AdvancedCollectionView Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -574,6 +639,13 @@
 				1FA4297F192A798300F673A0 /* Images.xcassets in Resources */,
 				1FE17BEB192E8BC900620DC3 /* detail-cheetah.json in Resources */,
 				1FE17BF1192E8BC900620DC3 /* detail-margay.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E1DB57751B67E87B002587FC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -629,7 +701,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E1DB57731B67E87B002587FC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E1DB577C1B67E87B002587FC /* AdvancedCollectionView_Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E1DB577E1B67E87B002587FC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1FA42968192A798300F673A0 /* AdvancedCollectionView */;
+			targetProxy = E1DB577D1B67E87B002587FC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		1FA42AFB192A937400F673A0 /* Main_iPhone.storyboard */ = {
@@ -755,6 +843,49 @@
 			};
 			name = Release;
 		};
+		E1DB57801B67E87B002587FC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "AdvancedCollectionView Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AdvancedCollectionView.app/AdvancedCollectionView";
+			};
+			name = Debug;
+		};
+		E1DB57811B67E87B002587FC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "AdvancedCollectionView Tests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AdvancedCollectionView.app/AdvancedCollectionView";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -775,6 +906,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		E1DB577F1B67E87B002587FC /* Build configuration list for PBXNativeTarget "AdvancedCollectionView Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E1DB57801B67E87B002587FC /* Debug */,
+				E1DB57811B67E87B002587FC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

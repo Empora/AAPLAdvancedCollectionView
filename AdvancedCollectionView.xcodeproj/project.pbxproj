@@ -114,7 +114,6 @@
 		E1178C201A79ADBB000F6748 /* AAPLCollectionViewSectionedGridLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = E1178C1E1A79ADBB000F6748 /* AAPLCollectionViewSectionedGridLayout.h */; };
 		E1178C211A79ADBB000F6748 /* AAPLCollectionViewSectionedGridLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E1178C1F1A79ADBB000F6748 /* AAPLCollectionViewSectionedGridLayout.m */; };
 		E11833161B34388000E2994D /* PlaceHolderTest.xib in Resources */ = {isa = PBXBuildFile; fileRef = E11833151B34388000E2994D /* PlaceHolderTest.xib */; };
-		E1DB57721B67E6D3002587FC /* travis.yml in Resources */ = {isa = PBXBuildFile; fileRef = E1DB57711B67E6D3002587FC /* travis.yml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -228,7 +227,6 @@
 		E1178C1F1A79ADBB000F6748 /* AAPLCollectionViewSectionedGridLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPLCollectionViewSectionedGridLayout.m; sourceTree = "<group>"; };
 		E11833151B34388000E2994D /* PlaceHolderTest.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaceHolderTest.xib; sourceTree = "<group>"; };
 		E18CA4BF19AE0C4E000E4BED /* AAPLAdvancedCollectionView.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AAPLAdvancedCollectionView.podspec; sourceTree = SOURCE_ROOT; };
-		E1DB57711B67E6D3002587FC /* travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = travis.yml; sourceTree = SOURCE_ROOT; };
 		E1EAA8D11B34110200167DB2 /* AAPLPlaceholderView+Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AAPLPlaceholderView+Internal.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -276,7 +274,6 @@
 				1FA4296D192A798300F673A0 /* Info.plist */,
 				1FA4296E192A798300F673A0 /* main.m */,
 				1FA42AEA192A7F6300F673A0 /* AdvancedCollectionView-Prefix.pch */,
-				E1DB57711B67E6D3002587FC /* travis.yml */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -565,7 +562,6 @@
 				1FA42AFD192A937400F673A0 /* Main_iPhone.storyboard in Resources */,
 				1FE17BF4192E8BC900620DC3 /* detail-oncilla.json in Resources */,
 				1FE17BE9192E8BC900620DC3 /* detail-bobcat.json in Resources */,
-				E1DB57721B67E6D3002587FC /* travis.yml in Resources */,
 				1FE17BEE192E8BC900620DC3 /* detail-leopard.json in Resources */,
 				1FE17BF5192E8BC900620DC3 /* detail-serval.json in Resources */,
 				E11833161B34388000E2994D /* PlaceHolderTest.xib in Resources */,

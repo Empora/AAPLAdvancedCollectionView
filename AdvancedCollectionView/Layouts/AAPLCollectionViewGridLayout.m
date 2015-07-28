@@ -167,6 +167,8 @@ typedef NS_ENUM(NSInteger, AAPLAutoScrollDirection) {
 
 @property (nonatomic) NSInteger totalNumberOfItems;
 @property (nonatomic, strong) NSMutableArray *layoutAttributes;
+
+// pinnableAttributes need to be stored to reset them centrally before layouting
 @property (nonatomic, strong) NSMutableArray *pinnableAttributes;
 @property (nonatomic, strong) AAPLGridLayoutInfo *layoutInfo;
 @property (nonatomic, strong) NSMutableDictionary *indexPathKindToSupplementaryAttributes;
@@ -1260,6 +1262,7 @@ typedef NS_ENUM(NSInteger, AAPLAutoScrollDirection) {
         
         footer.visibleWhileShowingPlaceholder = footerMetrics.visibleWhileShowingPlaceholder;
         footer.height = footerMetrics.height;
+        footer.shouldPin = footerMetrics.shouldPin;
         footer.backgroundColor = footerMetrics.backgroundColor;
         footer.padding = footerMetrics.padding;
         footer.hidden = footerMetrics.hidden;
@@ -1514,13 +1517,20 @@ typedef NS_ENUM(NSInteger, AAPLAutoScrollDirection) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForItem:footerIndex inSection:sectionIndex];
         AAPLCollectionViewGridLayoutAttributes *footerAttribute = [attributeClass layoutAttributesForSupplementaryViewOfKind:UICollectionElementKindSectionFooter withIndexPath:indexPath];
         footerAttribute.frame = frame;
+        footerAttribute.unpinnedY = frame.origin.y;
         footerAttribute.zIndex = HEADER_ZINDEX;
+        footerAttribute.pinnedHeader = NO;
         footerAttribute.backgroundColor = footer.backgroundColor ? : section.backgroundColor;
         footerAttribute.selectedBackgroundColor = footer.selectedBackgroundColor;
         footerAttribute.padding = footer.padding;
         footerAttribute.editing = _editing;
         footerAttribute.hidden = NO;
         [_layoutAttributes addObject:footerAttribute];
+        
+        if (footer.shouldPin) {
+            [section.pinnableFooterAttributes addObject:footerAttribute];
+            [self.pinnableAttributes addObject:footerAttribute];
+        }
         
         AAPLIndexPathKind *indexPathKind = [[AAPLIndexPathKind alloc] initWithIndexPath:indexPath kind:UICollectionElementKindSectionFooter];
         _indexPathKindToSupplementaryAttributes[indexPathKind] = footerAttribute;
@@ -1673,6 +1683,11 @@ typedef NS_ENUM(NSInteger, AAPLAutoScrollDirection) {
         [self invalidateLayout];
 }
 
+/**
+ *  Set all pinnable attributes to their original state (correct location as if not pinned)
+ *
+ *  @param pinnableAttributes
+ */
 - (void)resetPinnableAttributes:(NSArray *)pinnableAttributes
 {
     for (AAPLCollectionViewGridLayoutAttributes *attributes in pinnableAttributes) {
@@ -1683,11 +1698,53 @@ typedef NS_ENUM(NSInteger, AAPLAutoScrollDirection) {
     }
 }
 
+/**
+ *  Apply a minY position to an attribute.
+ *  If the attribute's frame ends before reaching minY
+ *  it's position will be adjusted so that it sits right
+ *  at minY with it's bottom edge.
+ *  Thus this method pins attributes which would sit above
+ *  maxY to the bottom indicated by minY.
+ *
+ *  There is a similar method which pins an attribute's bottom
+ *  to minY if it sits BELOW (not above, like in this method) minY.
+ *  @see {@link #applyBottomPinningToAttributes:maxY}
+ *
+ *  @param attributes
+ *  @param minY
+ *
+ *  @return Returns the new maxY value, representing the top (y origin) of the attribute's frame.
+ */
+- (CGFloat)applyBottomPinningToAttributes:(NSArray *)attributes minY:(CGFloat)minY
+{
+    for (AAPLCollectionViewGridLayoutAttributes *attr in [attributes reverseObjectEnumerator]) {
+        CGRect frame = attr.frame;
+        if (CGRectGetMaxY(frame) < minY) {
+            frame.origin.y = minY - CGRectGetHeight(frame);
+            minY = frame.origin.y;
+        }
+        attr.zIndex = PINNED_HEADER_ZINDEX;
+        attr.frame = frame;
+    }
+    
+    return minY;
+}
+
+/**
+ *  Apply a maxY position to an attribute.
+ *  Ensures that the attributes frame is always
+ *  visually above a certain y offset.
+ *
+ *  @param attributes
+ *  @param maxY
+ *
+ *  @return Returns the new maxY value
+ */
 - (CGFloat)applyBottomPinningToAttributes:(NSArray *)attributes maxY:(CGFloat)maxY
 {
     for (AAPLCollectionViewGridLayoutAttributes *attr in [attributes reverseObjectEnumerator]) {
         CGRect frame = attr.frame;
-        if (CGRectGetMaxY(frame) < maxY) {
+        if (CGRectGetMaxY(frame) > maxY) {
             frame.origin.y = maxY - CGRectGetHeight(frame);
             maxY = frame.origin.y;
         }
@@ -1698,12 +1755,19 @@ typedef NS_ENUM(NSInteger, AAPLAutoScrollDirection) {
     return maxY;
 }
 
-// pin the attributes starting at minY as long a they don't cross maxY and return the new minY
+/**
+ *  Pin the attributes starting at minY as long a they don't cross maxY and return the new minY
+ *
+ *  @param attributes
+ *  @param minY
+ *
+ *  @return Returns the new minY, representing the bottom of the attribute's frame.
+ */
 - (CGFloat)applyTopPinningToAttributes:(NSArray *)attributes minY:(CGFloat)minY
 {
     for (AAPLCollectionViewGridLayoutAttributes *attr in attributes) {
         CGRect  attrFrame = attr.frame;
-        if (attrFrame.origin.y  < minY) {
+        if (attrFrame.origin.y < minY) {
             attrFrame.origin.y = minY;
             minY = CGRectGetMaxY(attrFrame);    // we have a new pinning offset
         }
@@ -1755,6 +1819,7 @@ typedef NS_ENUM(NSInteger, AAPLAutoScrollDirection) {
     else
         contentOffset = [self targetContentOffsetForProposedContentOffset:collectionView.contentOffset];
     
+    // pinnableY represents the position at which the viewport starts
     CGFloat pinnableY = contentOffset.y + collectionView.contentInset.top;
     CGFloat nonPinnableY = pinnableY;
     
@@ -1769,7 +1834,7 @@ typedef NS_ENUM(NSInteger, AAPLAutoScrollDirection) {
     
     if (section.nonPinnableHeaderAttributes && [section.nonPinnableHeaderAttributes count]) {
         [self resetPinnableAttributes:section.nonPinnableHeaderAttributes];
-        nonPinnableY = [self applyBottomPinningToAttributes:section.nonPinnableHeaderAttributes maxY:nonPinnableY];
+        nonPinnableY = [self applyBottomPinningToAttributes:section.nonPinnableHeaderAttributes minY:nonPinnableY];
         [self finalizePinnedAttributes:section.nonPinnableHeaderAttributes zIndex:PINNED_HEADER_ZINDEX];
     }
     
@@ -1786,6 +1851,19 @@ typedef NS_ENUM(NSInteger, AAPLAutoScrollDirection) {
         [self applyTopPinningToAttributes:overlappingSection.pinnableHeaderAttributes minY:pinnableY];
         [self finalizePinnedAttributes:overlappingSection.pinnableHeaderAttributes zIndex:PINNED_HEADER_ZINDEX - 100];
     };
+    
+    
+    // Pin pinnable footers to bottom of viewport if necessary
+    // bottomPinnableY represents the position at which the viewport ends
+    CGFloat bottomPinnableY = collectionView.frame.size.height + contentOffset.y;
+    [_layoutInfo.sections enumerateKeysAndObjectsUsingBlock:^(NSNumber *sectionIndex, AAPLGridLayoutSectionInfo *sectionInfo, BOOL *stop) {
+        if (AAPLGlobalSection == [sectionIndex intValue])
+            return;
+        if(sectionInfo.pinnableFooterAttributes.count){
+            [self applyBottomPinningToAttributes:sectionInfo.pinnableFooterAttributes maxY:bottomPinnableY];
+            [self finalizePinnedAttributes:sectionInfo.pinnableFooterAttributes zIndex:PINNED_HEADER_ZINDEX - 100];
+        }
+    }];
 }
 
 - (AAPLCollectionViewGridLayoutAttributes *)initialLayoutAttributesForAttributes:(AAPLCollectionViewGridLayoutAttributes *)attributes

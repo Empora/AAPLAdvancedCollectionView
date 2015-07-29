@@ -16,6 +16,8 @@
 #import "AAPLCat.h"
 #import "AAPLDataAccessManager.h"
 
+#import "AAPLCatDetailHeader.h"
+
 @interface AAPLCatDetailDataSource ()
 @property (nonatomic, strong) AAPLCat *cat;
 @property (nonatomic, strong) AAPLKeyValueDataSource *classificationDataSource;
@@ -38,6 +40,7 @@
     _cat = cat;
     _classificationDataSource = [[AAPLKeyValueDataSource alloc] initWithObject:cat];
     _classificationDataSource.defaultMetrics.rowHeight = 22;
+    _classificationDataSource.defaultMetrics.backgroundColor = [UIColor greenColor];
     _classificationDataSource.title = NSLocalizedString(@"Classification", @"Title of the classification data section");
     [_classificationDataSource dataSourceTitleHeader];
 
@@ -45,8 +48,23 @@
 
     _descriptionDataSource = [[AAPLTextValueDataSource alloc] initWithObject:cat];
     _descriptionDataSource.defaultMetrics.rowHeight = AAPLRowHeightVariable;
+    _descriptionDataSource.defaultMetrics.backgroundColor = [UIColor lightGrayColor];
 
     [self addDataSource:_descriptionDataSource];
+    
+    __weak typeof(&*self) weakself = self;
+    
+    AAPLLayoutSupplementaryMetrics* footer = [self newFooterForSectionAtIndex:1];
+    footer.shouldPin = YES;
+    footer.height = 110;
+    footer.backgroundColor = [UIColor yellowColor];
+    footer.supplementaryViewClass = [AAPLCatDetailHeader class];
+    footer.configureView = ^(UICollectionReusableView *view, AAPLDataSource *dataSource, NSIndexPath *indexPath) {
+        AAPLCatDetailHeader *headerView = (AAPLCatDetailHeader *)view;
+        headerView.bottomBorderColor = nil;
+        [headerView configureWithCat:weakself.cat];
+        headerView.backgroundColorWhenPinned = [UIColor purpleColor];
+    };
 
     return self;
 }
@@ -90,6 +108,11 @@
             }];
         }];
     }];
+}
+
+- (void) registerReusableViewsWithCollectionView:(UICollectionView *)collectionView{
+    [super registerReusableViewsWithCollectionView:collectionView];
+    [collectionView registerClass:[AAPLCatDetailHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:NSStringFromClass([AAPLCatDetailHeader class])];
 }
 
 @end

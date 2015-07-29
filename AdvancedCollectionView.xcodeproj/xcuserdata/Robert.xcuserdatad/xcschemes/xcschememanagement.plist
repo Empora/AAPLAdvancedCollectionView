@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>AdvancedCollectionView.xcscheme</key>
+		<key>AdvancedCollectionView.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -13,6 +13,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>1FA42968192A798300F673A0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E1DB57761B67E87B002587FC</key>
 		<dict>
 			<key>primary</key>
 			<true/>

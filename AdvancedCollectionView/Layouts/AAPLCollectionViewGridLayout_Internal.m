@@ -61,6 +61,7 @@
     _phantomCellIndex = NSNotFound;
     _phantomCellSize = CGSizeZero;
     _pinnableHeaderAttributes = [NSMutableArray array];
+    _pinnableFooterAttributes = [NSMutableArray array];
 
     return self;
 }

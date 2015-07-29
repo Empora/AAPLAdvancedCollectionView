@@ -27,15 +27,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-/*
+
     self.dataSource = [[AAPLSegmentedDataSource alloc] init];
     self.detailDataSource = [self newDetailDataSource];
     self.sightingsDataSource = [self newSightingsDataSource];
     [self.dataSource addDataSource:self.detailDataSource];
     [self.dataSource addDataSource:self.sightingsDataSource];
-*/
-    self.dataSource = (AAPLSegmentedDataSource*)[self newDetailDataSource];
-    
     
     __weak typeof(&*self) weakself = self;
 
@@ -64,7 +61,6 @@
 
     NSString *errorMessage = NSLocalizedString(@"A network problem occurred loading details for “%@”.", @"Error message to show when unable to load cat details.");
     dataSource.errorMessage = [NSString localizedStringWithFormat:errorMessage, self.cat.name];
-
 
     return dataSource;
 }

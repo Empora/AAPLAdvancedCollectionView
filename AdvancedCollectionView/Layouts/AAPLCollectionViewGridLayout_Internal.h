@@ -82,6 +82,7 @@ typedef CGSize (^AAPLLayoutMeasureBlock)(NSInteger itemIndex, CGRect frame);
 
 @property (nonatomic, strong) NSMutableArray *pinnableHeaderAttributes;
 @property (nonatomic, strong) NSMutableArray *nonPinnableHeaderAttributes;
+@property (nonatomic, strong) NSMutableArray *pinnableFooterAttributes;
 @property (nonatomic, strong) AAPLCollectionViewGridLayoutAttributes *backgroundAttribute;
 
 - (AAPLGridLayoutSupplementalItemInfo *)addSupplementalItemAsHeader:(BOOL)header;

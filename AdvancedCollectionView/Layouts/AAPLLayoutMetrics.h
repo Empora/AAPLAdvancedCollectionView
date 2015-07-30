@@ -69,6 +69,9 @@ typedef void (^AAPLLayoutSupplementaryItemConfigurationBlock)(UICollectionReusab
 /// An optional block used to create an instance of the supplementary view.
 @property (nonatomic, copy) AAPLLayoutSupplementaryItemCreationBlock createView;
 
+/// Use to define how padding should be used
+@property (nonatomic) BOOL inSection;
+
 /// A block that can be used to configure the supplementary view after it is created.
 @property (nonatomic, copy) AAPLLayoutSupplementaryItemConfigurationBlock configureView;
 

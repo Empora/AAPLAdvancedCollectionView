@@ -36,6 +36,7 @@ typedef CGSize (^AAPLLayoutMeasureBlock)(NSInteger itemIndex, CGRect frame);
 @property (nonatomic) UIColor *backgroundColor;
 @property (nonatomic) UIColor *selectedBackgroundColor;
 @property (nonatomic) BOOL hidden;
+@property (nonatomic) BOOL inSection;
 /// passed along to attributes
 @property (nonatomic) UIEdgeInsets padding;
 @end

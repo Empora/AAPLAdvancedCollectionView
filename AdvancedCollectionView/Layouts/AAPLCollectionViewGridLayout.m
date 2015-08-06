@@ -1241,6 +1241,7 @@ typedef NS_ENUM(NSInteger, AAPLAutoScrollDirection) {
         header.visibleWhileShowingPlaceholder = headerMetrics.visibleWhileShowingPlaceholder;
         header.padding = headerMetrics.padding;
         header.hidden = headerMetrics.hidden;
+        header.inSection = headerMetrics.inSection;
         
         UIColor *backgroundColor = headerMetrics.backgroundColor;
         if (backgroundColor)
@@ -1266,6 +1267,7 @@ typedef NS_ENUM(NSInteger, AAPLAutoScrollDirection) {
         footer.backgroundColor = footerMetrics.backgroundColor;
         footer.padding = footerMetrics.padding;
         footer.hidden = footerMetrics.hidden;
+        footer.inSection = footerMetrics.inSection;
     }
     
     // A section can either have a placeholder or items. Arbitrarily deciding the placeholder takes precedence.

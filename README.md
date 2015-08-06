@@ -5,6 +5,13 @@
 This example demonstrates code factoring approaches to UICollectionViewDataSource that allow developers to compose complex and rich data models. In addition, the sample implements swipe to edit, batch editing including drag reordering, and a sophisticated custom UICollectionViewLayout that features pinning headers, global headers, and loading placeholders.
 
 # Changelog
+
+## 1.1.13
+AAPLCollectionViewController registers reusable views as soon as the datasource changed.
+
+## 1.1.12
+Headers and footers can be optionally layouted along the cells within a section, adhering to interItemSpacing and section insets. Before headers and footers always were layouted outside of the section.
+
 ## 1.1.11
 Support for pinned footers. As opposed topinned headers, pinned footers stick to the bottom of the screen if they would otherwise be hidden below the viewport.
  

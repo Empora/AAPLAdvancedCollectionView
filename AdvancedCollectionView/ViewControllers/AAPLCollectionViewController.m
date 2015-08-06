@@ -111,6 +111,9 @@ static void * const AAPLDataSourceContext = @"DataSourceContext";
         AAPLDataSource *aaplDataSource = (AAPLDataSource *)dataSource;
         if (!aaplDataSource.delegate)
             aaplDataSource.delegate = self;
+        
+        // make sure cells from new additional datasources get registered. Also prevents crashes if datasources trigger loading before viewWillAppear:
+        [aaplDataSource registerReusableViewsWithCollectionView:collectionView];
     }
 }
 

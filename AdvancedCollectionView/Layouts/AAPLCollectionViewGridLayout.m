@@ -1572,6 +1572,9 @@ typedef NS_ENUM(NSInteger, AAPLAutoScrollDirection) {
 
 - (void)buildLayout
 {
+    
+    AAPLGridLayoutSectionInfo *lastSection = nil;
+    
     if (_flags.layoutMetricsAreValid)
         return;
     
@@ -1626,13 +1629,14 @@ typedef NS_ENUM(NSInteger, AAPLAutoScrollDirection) {
         }];
         [self addLayoutAttributesForSection:globalSection atIndex:AAPLGlobalSection dataSource:dataSource];
         globalNonPinningHeight = [self heightOfAttributes:globalSection.nonPinnableHeaderAttributes];
+        lastSection = globalSection;
     }
     
     for (NSInteger sectionIndex = 0; sectionIndex < numberOfSections; ++sectionIndex) {
-        AAPLCollectionViewGridLayoutAttributes *attributes = [_layoutAttributes lastObject];
-        if (attributes)
-            start = CGRectGetMaxY(attributes.frame);
         AAPLGridLayoutSectionInfo *section = [self sectionInfoForSectionAtIndex:sectionIndex];
+        if (lastSection) {
+            start = CGRectGetMaxY(lastSection.frame);
+        }
         [section computeLayoutWithOrigin:start measureItemBlock:^(NSInteger itemIndex, CGRect frame) {
             NSIndexPath *indexPath = [NSIndexPath indexPathForItem:itemIndex inSection:sectionIndex];
             return [dataSource collectionView:collectionView sizeFittingSize:frame.size forItemAtIndexPath:indexPath];
@@ -1642,11 +1646,11 @@ typedef NS_ENUM(NSInteger, AAPLAutoScrollDirection) {
             return [self measureSupplementalItemOfKind:UICollectionElementKindSectionHeader atIndexPath:indexPath];
         }];
         [self addLayoutAttributesForSection:section atIndex:sectionIndex dataSource:dataSource];
+        lastSection = section;
     }
     
-    AAPLCollectionViewGridLayoutAttributes *attributes = [_layoutAttributes lastObject];
-    if (attributes)
-        start = CGRectGetMaxY(attributes.frame);
+    if (lastSection)
+        start = CGRectGetMaxY(lastSection.frame);
     
     CGFloat layoutHeight = start;
     
@@ -1684,6 +1688,7 @@ typedef NS_ENUM(NSInteger, AAPLAutoScrollDirection) {
     if (shouldInvalidate)
         [self invalidateLayout];
 }
+
 
 /**
  *  Set all pinnable attributes to their original state (correct location as if not pinned)

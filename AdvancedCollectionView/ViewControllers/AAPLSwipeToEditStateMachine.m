@@ -103,6 +103,14 @@ NSString * const AAPLSwipeStateGroupEdit = @"GroupEdit";
     return self;
 }
 
+- (void)dealloc{
+    //ensure gesture recognizers send no more messages to this state machine if they are still active
+    _panGestureRecognizer.delegate = nil;
+    _longPressGestureRecognizer.delegate = nil;
+    _panGestureRecognizer.enabled = NO;
+    _longPressGestureRecognizer.enabled = NO;
+}
+
 - (void)setBatchEditing:(BOOL)batchEditing
 {
     if (_batchEditing == batchEditing)

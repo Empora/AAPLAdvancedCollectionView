@@ -6,6 +6,9 @@ This example demonstrates code factoring approaches to UICollectionViewDataSourc
 
 # Changelog
 
+## 1.1.16
+ Fixed issue with AAPLSwipeToEditStateMachine still receiving gesture messages after being deallocated.
+
 ## 1.1.13
 AAPLCollectionViewController registers reusable views as soon as the datasource changed.
 

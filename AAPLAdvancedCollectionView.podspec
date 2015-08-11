@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "AAPLAdvancedCollectionView"
-  s.version      = "1.1.16"
+  s.version      = "1.1.17"
   s.summary      = "Advanced User Interfaces Using Collection View"
   s.description  = <<-DESC
                    This example demonstrates code factoring approaches to UICollectionViewDataSource

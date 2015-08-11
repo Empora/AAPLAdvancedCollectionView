@@ -16,6 +16,12 @@
 @property (nonatomic, readwrite) BOOL pinned;
 @property (nonatomic, strong) AAPLHairlineView *borderView;
 @property (nonatomic, strong) UIColor *backgroundColorBeforePinning;
+
+/**
+ *  Flag to determine if the next attribute update needs to be animated.
+ *  A cell that has just was reused the next attribute update is most likely the initial one, leading to visual glitches if animated.
+ */
+@property (nonatomic, readwrite) BOOL justPreparedForReuse;
 @end
 
 @implementation AAPLPinnableHeaderView
@@ -53,6 +59,7 @@
     _bottomBorderColor = [UIColor colorWithWhite:204/255.0 alpha:1];
     _bottomBorderColorWhenPinned = [UIColor colorWithWhite:204/255.0 alpha:1];
     _backgroundColorWhenPinned = nil;
+    _justPreparedForReuse = YES;
 }
 
 - (UIEdgeInsets)defaultPadding
@@ -100,19 +107,27 @@
         self.padding = layoutAttributes.padding;
 
     // If we're not pinned, then immediately set the background colour, otherwise, remember it for when we restore the background color
-    if (!_pinned)
+    if (!_pinned){
         self.backgroundColor = layoutAttributes.backgroundColor;
-    else
+    } else {
         _backgroundColorBeforePinning = layoutAttributes.backgroundColor;
-
+    }
+    
+    BOOL shouldAnimate = (_justPreparedForReuse==NO);
+    _justPreparedForReuse = NO;
+    
     BOOL isPinned = layoutAttributes.pinnedHeader;
-
-    if (isPinned != _pinned)
-        [UIView animateWithDuration:0.25 animations:^{
+    
+    if (isPinned != _pinned){
+        
+        void (^block)() = ^{
             if (isPinned) {
                 _backgroundColorBeforePinning = self.backgroundColor;
-                if (self.backgroundColorWhenPinned)
+                if (self.backgroundColorWhenPinned){
                     self.backgroundColor = self.backgroundColorWhenPinned;
+                } else {
+                    self.backgroundColor = layoutAttributes.backgroundColor;
+                }
             }
             else {
                 self.backgroundColor = _backgroundColorBeforePinning;
@@ -131,7 +146,15 @@
             
             _borderView.backgroundColor = borderColor;
             _borderView.hidden = !showBorder;
-        }];
+        };
+
+        if(shouldAnimate){
+            [UIView animateWithDuration:0.25 animations:block];
+        } else {
+            block();
+        }
+        
+    }
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

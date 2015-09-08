@@ -22,4 +22,6 @@
 /// Set the items with optional animation and optionally updating existing items. By default, setting the items is not animated.
 - (void)setItems:(NSArray *)items updateExistingItems:(BOOL)update animated:(BOOL)animated;
 
+- (void)insertItems:(NSArray *)array atIndexes:(NSIndexSet *)indexes;
+
 @end

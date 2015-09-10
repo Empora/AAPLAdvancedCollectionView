@@ -106,7 +106,9 @@ static NSString * const AAPLStateNil = @"Nil";
 
 - (NSString *)missingTransitionFromState:(NSString *)fromState toState:(NSString *)toState
 {
-    [NSException raise:@"IllegalStateTransition" format:@"cannot transition from %@ to %@", fromState, toState];
+    #ifdef DEBUG
+        [NSException raise:@"IllegalStateTransition" format:@"cannot transition from %@ to %@", fromState, toState];
+    #endif
     return nil;
 }
 

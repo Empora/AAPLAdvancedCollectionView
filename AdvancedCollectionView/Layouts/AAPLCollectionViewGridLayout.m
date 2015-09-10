@@ -1363,6 +1363,7 @@ typedef NS_ENUM(NSInteger, AAPLAutoScrollDirection) {
     
     [section.pinnableHeaderAttributes removeAllObjects];
     [section.nonPinnableHeaderAttributes removeAllObjects];
+    [section.pinnableFooterAttributes removeAllObjects];
     
     if (AAPLGlobalSection == sectionIndex && section.backgroundColor) {
         // Add the background decoration attribute

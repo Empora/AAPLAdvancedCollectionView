@@ -583,7 +583,7 @@
 {
     AAPL_ASSERT_MAIN_THREAD;
     if (self.shouldDisplayPlaceholder) {
-        __weak typeof(&*self) weakself = self;
+//        __weak typeof(&*self) weakself = self;
         [self enqueuePendingUpdateBlock:^{
             // causes crash - ToDo find solution
             //            [weakself notifyItemsRemovedAtIndexPaths:removedIndexPaths];

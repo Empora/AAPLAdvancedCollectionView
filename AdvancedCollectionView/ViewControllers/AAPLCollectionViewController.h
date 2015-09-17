@@ -13,7 +13,6 @@
 @property (nonatomic, getter = isEditing) BOOL editing;
 
 @property (nonatomic) BOOL endlessScrollingEnabled;
-@property (nonatomic) BOOL clearsSelectionOnViewWillAppear;
 
 @end
 

@@ -237,7 +237,7 @@
 		E1178C1E1A79ADBB000F6748 /* AAPLCollectionViewSectionedGridLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLCollectionViewSectionedGridLayout.h; sourceTree = "<group>"; };
 		E1178C1F1A79ADBB000F6748 /* AAPLCollectionViewSectionedGridLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPLCollectionViewSectionedGridLayout.m; sourceTree = "<group>"; };
 		E11833151B34388000E2994D /* PlaceHolderTest.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaceHolderTest.xib; sourceTree = "<group>"; };
-		E18CA4BF19AE0C4E000E4BED /* AAPLAdvancedCollectionView.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AAPLAdvancedCollectionView.podspec; sourceTree = SOURCE_ROOT; };
+		E18CA4BF19AE0C4E000E4BED /* AAPLAdvancedCollectionView.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AAPLAdvancedCollectionView.podspec; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		E1DB57771B67E87B002587FC /* AdvancedCollectionView Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AdvancedCollectionView Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1DB577A1B67E87B002587FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1DB577B1B67E87B002587FC /* AdvancedCollectionView_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdvancedCollectionView_Tests.m; sourceTree = "<group>"; };
@@ -914,6 +914,7 @@
 				E1DB57811B67E87B002587FC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

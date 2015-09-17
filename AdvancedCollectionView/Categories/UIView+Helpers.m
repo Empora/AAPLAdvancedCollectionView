@@ -26,7 +26,12 @@
 #ifndef AAPL_APPEXTENSION
     return [[UIApplication sharedApplication] sendAction:action to:target from:sender forEvent:nil];
 #else
-    return [target performSelector:action withObject:self];
+    //http://stackoverflow.com/questions/7017281/performselector-may-cause-a-leak-because-its-selector-is-unknown
+    IMP imp = [target methodForSelector:action];
+    void (*func)(id, SEL) = (void *)imp;
+    func(target, action);
+//    [target performSelector:action withObject:self];
+    return YES;
 #endif
 }
 

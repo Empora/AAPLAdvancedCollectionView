@@ -6,6 +6,9 @@ This example demonstrates code factoring approaches to UICollectionViewDataSourc
 
 # Changelog
 
+## 1.1.22
+ Bugfixes
+
 ## 1.1.17
  Fixed issue where pinnable header's pinned state was animated right after prepareForReuse, leading to visual glitches.
 

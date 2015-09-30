@@ -107,7 +107,7 @@ static NSString * const AAPLStateNil = @"Nil";
 - (NSString *)missingTransitionFromState:(NSString *)fromState toState:(NSString *)toState
 {
     #ifdef DEBUG
-        [NSException raise:@"IllegalStateTransition" format:@"cannot transition from %@ to %@", fromState, toState];
+        [NSException raise:@"IllegalStateTransition" format:@"cannot transition from %@ to %@. This most likely happens due to race conditions in the loadContent, resetContent and AAPLContentLoading -_doneWithNewState:eror:update calls.", fromState, toState];
     #endif
     return nil;
 }

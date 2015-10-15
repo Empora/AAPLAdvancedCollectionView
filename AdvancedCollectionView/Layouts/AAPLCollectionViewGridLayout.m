@@ -254,6 +254,12 @@ typedef NS_ENUM(NSInteger, AAPLAutoScrollDirection) {
     [self invalidateLayout];
 }
 
+- (void) invalidateLayoutMetrics{
+    _flags.layoutMetricsAreValid = NO;
+    _flags.layoutDataIsValid = NO;
+    [self invalidateLayout];
+}
+
 #pragma mark - Drag & Drop
 
 - (void)beginDraggingItemAtIndexPath:(NSIndexPath *)indexPath

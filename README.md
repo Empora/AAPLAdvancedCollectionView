@@ -6,7 +6,7 @@ This example demonstrates code factoring approaches to UICollectionViewDataSourc
 
 # Changelog
 ## 1.1.23
- Added invalidation method to AAPLCollectionViewGridLayout
+ Added invalidateLayoutMetrics method to AAPLCollectionViewGridLayout. Use invalidateLayoutMetrics instead of invalidateLayout to ensure a correct re-layouting behaviour.
 ## 1.1.22
  Bugfixes
 

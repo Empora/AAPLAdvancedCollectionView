@@ -22,4 +22,7 @@
 
 // Added by Empora
 -(Class)layoutInfoClass;
+
+- (void) invalidateLayoutMetrics;
+
 @end

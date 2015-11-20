@@ -485,4 +485,8 @@ NSString * const AAPLSegmentedDataSourceHeaderKey = @"AAPLSegmentedDataSourceHea
     [self notifyWillLoadContent];
 }
 
+-(NSString *)loadingState {
+    return _selectedDataSource.loadingState;
+}
+
 @end

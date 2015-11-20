@@ -5,6 +5,9 @@
 This example demonstrates code factoring approaches to UICollectionViewDataSource that allow developers to compose complex and rich data models. In addition, the sample implements swipe to edit, batch editing including drag reordering, and a sophisticated custom UICollectionViewLayout that features pinning headers, global headers, and loading placeholders.
 
 # Changelog
+## 1.1.25
+Fixed issue where AAPLSegmentedDataSource would not forward loading state from sub-datasources
+
 ## 1.1.24
  Fixed issue where AAPLSegmentedDataSource would not forward AAPLDataSource's - ````(void)whenLoaded:(dispatch_block_t)block````
 

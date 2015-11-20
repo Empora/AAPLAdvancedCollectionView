@@ -271,6 +271,10 @@ NSString * const AAPLSegmentedDataSourceHeaderKey = @"AAPLSegmentedDataSourceHea
     [_selectedDataSource loadContent];
 }
 
+- (void)whenLoaded:(dispatch_block_t)block{
+    [_selectedDataSource whenLoaded:block];
+}
+
 - (void)resetContent
 {
     for (AAPLDataSource *dataSource in self.dataSources)
@@ -479,6 +483,10 @@ NSString * const AAPLSegmentedDataSourceHeaderKey = @"AAPLSegmentedDataSourceHea
         return;
 
     [self notifyWillLoadContent];
+}
+
+-(NSString *)loadingState {
+    return _selectedDataSource.loadingState;
 }
 
 @end

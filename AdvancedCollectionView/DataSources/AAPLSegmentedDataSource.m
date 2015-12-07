@@ -295,8 +295,8 @@ NSString * const AAPLSegmentedDataSourceHeaderKey = @"AAPLSegmentedDataSourceHea
     if ([loadingState isEqualToString:AAPLLoadStateError] && (_selectedDataSource.errorMessage || _selectedDataSource.errorTitle))
         return YES;
 
-    // Only display a placeholder when we're loading or have no content
-    if (![loadingState isEqualToString:AAPLLoadStateLoadingContent] && ![loadingState isEqualToString:AAPLLoadStateNoContent])
+    // Only display a placeholder when we're loading or have no content or we are in initial loading state
+    if (![loadingState isEqualToString:AAPLLoadStateLoadingContent] && ![loadingState isEqualToString:AAPLLoadStateNoContent] && ![loadingState isEqualToString:AAPLLoadStateInitial])
         return NO;
 
     // Can't display the placeholder if both the title and message is missing

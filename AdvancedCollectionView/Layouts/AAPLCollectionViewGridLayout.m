@@ -1637,7 +1637,7 @@ typedef NS_ENUM(NSInteger, AAPLAutoScrollDirection) {
     }
     
     for (NSInteger sectionIndex = 0; sectionIndex < numberOfSections; ++sectionIndex) {
-        AAPLCollectionViewGridLayoutAttributes *attributes = [_layoutAttributes lastObject];
+        AAPLCollectionViewGridLayoutAttributes *attributes = [self getAttributesWithMaxY:_layoutAttributes];
         if (attributes)
             start = CGRectGetMaxY(attributes.frame);
 
@@ -1694,6 +1694,23 @@ typedef NS_ENUM(NSInteger, AAPLAutoScrollDirection) {
         [self invalidateLayout];
 }
 
+/**
+ * This Method will return the attributeSet with the highest Y-Value
+ * we use this in buildLayout to determine the last highest set of attributes
+ */
+
+-(AAPLCollectionViewGridLayoutAttributes*)getAttributesWithMaxY:(NSMutableArray*)attributes {
+    
+    AAPLCollectionViewGridLayoutAttributes * currentHighestAttribute = nil;
+    int i = 0;
+    for (AAPLCollectionViewGridLayoutAttributes * attribute in attributes) {
+        if (CGRectGetMaxY(attribute.frame)> CGRectGetMaxY(currentHighestAttribute.frame)) {
+            currentHighestAttribute = attribute;
+        }
+        ++i;
+    }
+    return currentHighestAttribute;
+}
 
 /**
  *  Set all pinnable attributes to their original state (correct location as if not pinned)

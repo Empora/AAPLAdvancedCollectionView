@@ -25,4 +25,6 @@
 
 - (void) invalidateLayoutMetrics;
 
+@property (nonatomic,assign) BOOL shouldPinBehindNavbar;
+
 @end

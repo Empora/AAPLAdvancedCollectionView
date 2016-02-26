@@ -1849,7 +1849,8 @@ typedef NS_ENUM(NSInteger, AAPLAutoScrollDirection) {
         contentOffset = [self targetContentOffsetForProposedContentOffset:collectionView.contentOffset];
     
     // pinnableY represents the position at which the viewport starts
-    CGFloat pinnableY = contentOffset.y + collectionView.contentInset.top;
+    CGFloat pinnableY = contentOffset.y + collectionView.contentInset.top - 64; // App should go behind navbar
+
     CGFloat nonPinnableY = pinnableY;
     
     [self resetPinnableAttributes:self.pinnableAttributes];

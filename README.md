@@ -6,7 +6,7 @@ This example demonstrates code factoring approaches to UICollectionViewDataSourc
 
 # Changelog
 
-## 1.1.27
+## 1.1.28
 Fixed Issues where pinnableY prevented headers from leaving the screen completely 
 
 ## 1.1.27

@@ -210,6 +210,7 @@
     _stateMachine = nil;
     // Content has been reset, if we're loading something, chances are we don't need it.
     self.loadingInstance.current = NO;
+    self.loadingComplete = NO;
 }
 
 - (void)loadContent

@@ -6,6 +6,9 @@ This example demonstrates code factoring approaches to UICollectionViewDataSourc
 
 # Changelog
 
+## 1.1.30
+Fixed issue where whenLoaded would be called too early after resetContent
+
 ## 1.1.28
 Fixed Issues where pinnableY prevented headers from leaving the screen completely 
 

@@ -115,6 +115,7 @@
 		E1178C211A79ADBB000F6748 /* AAPLCollectionViewSectionedGridLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E1178C1F1A79ADBB000F6748 /* AAPLCollectionViewSectionedGridLayout.m */; };
 		E11833161B34388000E2994D /* PlaceHolderTest.xib in Resources */ = {isa = PBXBuildFile; fileRef = E11833151B34388000E2994D /* PlaceHolderTest.xib */; };
 		E1DB577C1B67E87B002587FC /* AdvancedCollectionView_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E1DB577B1B67E87B002587FC /* AdvancedCollectionView_Tests.m */; };
+		E1F7C2351CB3F43400639538 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1F7C2341CB3F43400639538 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -242,6 +243,7 @@
 		E1DB577A1B67E87B002587FC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1DB577B1B67E87B002587FC /* AdvancedCollectionView_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdvancedCollectionView_Tests.m; sourceTree = "<group>"; };
 		E1EAA8D11B34110200167DB2 /* AAPLPlaceholderView+Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AAPLPlaceholderView+Internal.h"; sourceTree = "<group>"; };
+		E1F7C2341CB3F43400639538 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -424,6 +426,7 @@
 				E11833151B34388000E2994D /* PlaceHolderTest.xib */,
 				1FA42AFA192A91D800F673A0 /* Resources */,
 				1FA4296C192A798300F673A0 /* Supporting Files */,
+				E1F7C2341CB3F43400639538 /* Launch Screen.storyboard */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -638,6 +641,7 @@
 				1FE17BEA192E8BC900620DC3 /* detail-caracal.json in Resources */,
 				1FA4297F192A798300F673A0 /* Images.xcassets in Resources */,
 				1FE17BEB192E8BC900620DC3 /* detail-cheetah.json in Resources */,
+				E1F7C2351CB3F43400639538 /* Launch Screen.storyboard in Resources */,
 				1FE17BF1192E8BC900620DC3 /* detail-margay.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
